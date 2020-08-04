@@ -26,10 +26,15 @@ class Jogo(models.Model):
     date_created = models.DateTimeField(default=timezone.now, verbose_name="Data de criação")
     user_attack = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_attack', verbose_name="Usuário de Ataque")
     user_defense = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_defense', verbose_name="Usuário de Defesa")
+    ganhador = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_ganhador', verbose_name="Ganhador")
+    pontos = models.IntegerField(default=0, verbose_name="Pontos Recebidos")
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name="Categoria")
     aceite = models.BooleanField(default=False, verbose_name="Aceite")
     iniciado = models.BooleanField(default=False, verbose_name="Iniciado")
+    inicio_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Inicio do Jogo")
+    fim_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Fim do Jogo")
     Finalizado = models.BooleanField(default=False, verbose_name="Finalizado")
+
 
     def __str__(self):
         return self.name
