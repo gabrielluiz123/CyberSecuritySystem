@@ -133,6 +133,7 @@ class Index(View):
             except:
                 messages.error(request, 'Falha ao se cadastrar! Contacte o administrador do site!')
                 return render(request, self.template_name, self.contexto)
+            return render(request, self.template_name, self.contexto)
 
 
 def login(request):

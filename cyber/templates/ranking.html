@@ -10,6 +10,38 @@
                             <div class="col-12 ml-2 text-center">
                                 <h2 class="t-orange menu-title">Ranking</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
+                                <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Pontos</th>
+      <th scope="col">Defesa</th>
+      <th scope="col">Ataque</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for usuario in usuarios %}
+    <tr>
+        {% if forloop.counter == 1 %}
+      <th scope="row"><img style="max-height: 40px !important; width:auto !important;" src="{% static 'assets/img/gold_badge.png' %}"></th>
+        {% elif forloop.counter == 2 %}
+      <th scope="row"><img style="max-height: 40px !important; width:auto !important;" src="{% static 'assets/img/prata_badge.png' %}"></th>
+        {% elif forloop.counter == 3 %}
+      <th scope="row"><img style="max-height: 40px !important; width:auto !important;" src="{% static 'assets/img/bronze_badge.png' %}"></th>
+        {% else %}
+        <th scope="row">{{forloop.counter}}</th>
+        {% endif %}
+      <td>{{usuario.nome}}</td>
+      <td>{{usuario.pontos}}</td>
+      <td>{{usuario.pontos_defesa}}</td>
+      <td>{{usuario.pontos_ataque}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
                             </div>
                         </div>
                     </div>

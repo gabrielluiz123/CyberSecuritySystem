@@ -2,10 +2,34 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class Usuario(models.Model):
     pontos = models.IntegerField(default=0, verbose_name='Pontos')
+    pontos_ataque = models.IntegerField(default=0, verbose_name='Pontos de Ataque')
+    pontos_defesa = models.IntegerField(default=0, verbose_name='Pontos de Defesa')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Usuário')
     nome = models.CharField(max_length=255, verbose_name='Nome')
 
     def __str__(self):
         return self.nome
+
+
+class Categoria(models.Model):
+    nome = models.CharField(max_length=255, verbose_name="Categoria")
+
+    def __str__(self):
+        return self.nome
+
+
+class Jogo(models.Model):
+    name = models.CharField(max_length=255, default='Jogo', verbose_name="Nome")
+    date_created = models.DateTimeField(default=timezone.now, verbose_name="Data de criação")
+    user_attack = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_attack', verbose_name="Usuário de Ataque")
+    user_defense = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_defense', verbose_name="Usuário de Defesa")
+    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name="Categoria")
+    aceite = models.BooleanField(default=False, verbose_name="Aceite")
+    iniciado = models.BooleanField(default=False, verbose_name="Iniciado")
+    Finalizado = models.BooleanField(default=False, verbose_name="Finalizado")
+
+    def __str__(self):
+        return self.name
