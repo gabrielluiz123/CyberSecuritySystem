@@ -12,9 +12,11 @@ class Index(View):
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        usuarios = Usuario.objects.all().order_by('-pontos')[:10]
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
+            'usuarios':usuarios,
         }
 
     def get(self, request, *args, **kwargs):
