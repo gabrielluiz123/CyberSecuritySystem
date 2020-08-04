@@ -1,0 +1,62 @@
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'alert-danger' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Modal Test</title>
+</head>
+
+<body>
+  <div id="dummyModal" class="modal fade" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                  <div class="modal-header">
+        <h5 class="modal-title">Oops! Ocorreu um erro!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+                            <p class="text-modal text-center"><div class="modal-content">
+                               <div id="aa" class="alert {{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                            </div>
+                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- BS JavaScript -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script>
+
+$('document').ready(function() {
+  $('document').ready(function() {
+    console.log("AQUI");
+    $('#dummyModal').modal('show');
+  });
+});
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}

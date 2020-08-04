@@ -1,0 +1,358 @@
+{% load cms_tags menu_tags sekizai_tags %}
+{% load static %}
+<!doctype html>
+<html>
+
+<html>
+        <head>
+             {% include 'parciais/_head.html' %}
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <style type="text/css">
+            .nav {
+                padding-left: 0;
+            }
+            .nav li {
+                display: inline;
+                list-style-type: none;
+                padding-right: 20px;
+            }
+            .container {
+                width: 940px;
+                margin: 0 auto
+            }
+            .content {
+                float: left;
+                width: 80%;
+            }
+            .sidebar {
+                float: left;
+                width: 20%;
+            }
+        </style>
+        {% render_block "css" %}
+            {% include 'parciais/_head.html' %}
+
+                <title>{%block 'titulo'%}{%endblock%} | {{empresa}}</title>
+
+        </head>
+
+        <body>
+         {% cms_toolbar %}
+        <div class="container">
+            <ul class="nav">
+                {% show_menu 0 100 100 100 %}
+            </ul>
+        </div>
+        {% render_block "js" %}
+            <script id="__bs_script__">
+                //<![CDATA[
+                document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.26.7'><\/script>".replace("HOST", location.hostname));
+                //]]>
+            </script>
+            <header id="home">
+            {% include 'parciais/_header.html' %}
+            </header>
+            <div id="main">
+                {% include 'parciais/_messages.html' %}
+                {% block 'conteudo' %}{% endblock %}
+               {% block 'slider' %}{% endblock %}
+            </div>
+            {% if registro.status %}
+         <div class="modal fade login-task" tabindex="-1" role="dialog" id="renovar_registro">
+
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Renovar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+                                <form method="POST" class="text-left" action="{% url 'renovar_registro' registro.id %}">
+                                        {% csrf_token %}
+                                        <label>Próxima etapa:<br />
+                                            <textarea style="color: black; border: #333 solid 1px;"   name="next_stage"  class="form-control shadow-none my-1" required></textarea>
+                                        </label>
+                                        <br><label>Comentários:<br />
+                                            <textarea style="color: black; border: #333 solid 1px;"   name="comments"  class="form-control shadow-none my-1" required></textarea>
+                                        </label><br />
+                                        <label>Já foi feito homologação?<br />
+                                            <input type="radio" name="homologa_projeto" value="sim">
+                                              <label for="sim">Sim</label>
+                                             <input type="radio" name="homologa_projeto" checked value="nao">
+                                              <label for="nao">Não</label><br>
+                                        </label><br />
+                                        <label>Probabilidade de Fechamento: <br />
+                                                <select style="color: black; border: #333 solid 1px;" id="porcent" name="porcent" class="form-control shadow-none my-1">
+                                                    <option value="30%">30%</option>
+                                                    <option value="50%">50%</option>
+                                                    <option value="70%">70%</option>
+                                                    <option value="100%">100%</option>
+                                                </select>
+                                        </label><br />
+                                        <label>Data de Fechamento:<br />
+                                            <input style="color:black; border:#333 1px solid;" type="date" name="closed_date" class="form-control shadow-none my-1" required>
+                                        </label><br />
+                                        <label>Última Visita ao Cliente:<br />
+                                            <input style="color:black; border:#333 1px solid;" type="date" name="visited_date" class="form-control shadow-none my-1" required>
+                                        </label><br />
+                                        <br>
+                                        <button type="submit" class="btn btn-block m-0 btn-success" >Renovar</button>
+                                </form>
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endif %}
+            {% if not registro.status and not registro.atualizado and is_gerente %}
+
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="numero_registro">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Aprovar Registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <form method="POST" class="t-white text-left" action="{% url 'aprovar' registro.id %}">
+                                        {% csrf_token %}
+                                        <label style="color: black !important;">Número do Registro:<br />
+                                            <input type="text" name="numero_registro" placeholder="Número do Registro">
+                                        </label>
+                                        <button type="submit" class="btn btn-block m-0 btn-success" >Aprovar!</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="reprovar_registro">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Reprovar Registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                        <label style="color: black !important;">Deseja realmente Reprovar?<br />
+                                            <a href="{% url 'reprovar' registro.id %}" type="submit" class="btn btn-block m-0 btn-success" >Reprovar!</a>
+                                        </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <div class="modal fade login-task" tabindex="-1" role="dialog" id="reprovar_renovacao">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Reprovar Renovação</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                        <label style="color: black !important;">Deseja realmente Reprovar?<br />
+                                            <a href="{% url 'reprovar_renovacao' registro.id %}" type="submit" class="btn btn-block m-0 btn-success" >Reprovar!</a>
+                                        </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if not users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="login_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Entrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <form method="POST" class="t-white text-left" action="{% url 'login' %}">
+                                        {% csrf_token %}
+                                        <label style="color: black">Usuário:<br />
+                                            <input type="text" name="email" placeholder="Usuário" required>
+                                        </label>
+
+                                        <label style="color: black">Sua senha:<br />
+                                            <input type="password" name="pwd" placeholder="Sua senha" required>
+                                        </label><br />
+                                        <button id="btnAuth" type="submit" class="btn btn-block m-0 btn-success" >Entrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_revneda_modal">
+    <form method="POST" class="text-left" action="#register_revenda">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cadastrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">Revenda:</h6>
+                                        </div>
+                                        <br><label>CNPJ:<br />
+                                            <input onchange="consultaCNPJRV()" id="cnpj_revenda" type="text" name="cnpj_revenda" placeholder="CNPJ" required>
+                                        </label><br />
+                                        <label>Razão Social:<br />
+                                            <input type="text" id="razao_revenda" name="razao_revenda" placeholder="Razão Social" required>
+                                        </label><br />
+                                        <label>Rua:<br />
+                                            <input type="text" id="address_revenda" name="address_revenda" placeholder="Rua" required>
+                                        </label><br />
+                                        <label>Estado:<br />
+                                            <input type="text" name="state_revenda" id="state_revenda" placeholder="Estado" required>
+                                        </label><br />
+                                        <label>CEP:<br />
+                                            <input type="text" name="cep_revenda" id="cep_revenda" placeholder="CEP" required>
+                                        </label><br />
+                                        <label>Cidade:<br />
+                                            <input type="text" name="city_revenda" id="city_revenda" placeholder="Cidade" required>
+                                        </label><br />
+                                        <label>Contato:<br />
+                                            <input type="text" name="contato_revenda" id="contato_revenda" placeholder="Contato" required>
+                                        </label><br />
+                                        <label>Telefone:<br />
+                                            <input type="text" name="telefone_revenda" id="telefone_revenda" placeholder="Telefone" required>
+                                        </label><br />
+                                        <br><br>
+                                        <button type="submit" class="btn btn-block m-0 btn-success" >Cadastrar</button>
+
+                                </div>
+                            </div>
+                                </div>
+                                <div class="col-sm">
+                                  <div class="modal-header">
+                                            <h6 class="modal-title">Seu Usuário:</h6>
+                                  </div>
+                                   <br> <label>Usuário:<br />
+                                            <input type="text" name="user_revenda" placeholder="Usuário" required>
+                                        </label><br />
+                                        <label>E-mail:<br />
+                                            <input type="email" name="email" placeholder="Seu e-mail" required>
+                                        </label><br />
+                                        <label>Nome:<br />
+                                            <input type="text" name="name" placeholder="Seu nome" required>
+                                        </label><br />
+                                        <label>Senha:<br />
+                                            <input type="password" name="pwd" placeholder="Sua senha" required>
+                                        </label><br />
+                                        <label>Confirmar Senha:<br />
+                                            <input type="password" name="pwd2" placeholder="Confirmar Senha" required>
+                                        </label><br />
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    </form>
+            </div>
+
+            {%endif%}
+         {% if revenda_gerente %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cadastrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <form method="POST" class="text-left" action="#register">
+                                        {% csrf_token %}
+                                        <label>Usuário:<br />
+                                            <input type="text" name="user" placeholder="Usuário">
+                                        </label><br />
+                                        <label>E-mail:<br />
+                                            <input type="email" name="email" placeholder="Seu e-mail">
+                                        </label><br />
+                                        <label>Nome:<br />
+                                            <input type="text" name="name" placeholder="Seu nome">
+                                        </label><br />
+                                        <label>Senha:<br />
+                                            <input type="password" name="pwd" placeholder="Sua senha">
+                                        </label><br />
+                                        <label>Confirmar Senha:<br />
+                                            <input type="password" name="pwd2" placeholder="Confirmar Senha">
+                                        </label><br />
+                                        <br><br>
+                                        <button type="submit" class="btn btn-block m-0 btn-success" >Cadastrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         {% endif %}
+         {% block content %}{% endblock content %}
+            <button type="button" class="btn btn-toTop bg-info t-white scroll" data-scroll-to="home">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+         <footer class="bg-brand">
+                {% include 'parciais/footer.html' %}
+            </footer>
+            <script defer src="{% static '/assets/pjs/main.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/home.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/albums.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/jquery.cycle.lite.1.0.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/carousel.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/script_add.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/web-lib.js'%}" type="text/javascript"></script>
+        </body>

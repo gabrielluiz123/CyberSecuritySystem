@@ -1,0 +1,34 @@
+{% load static %}
+           <section class="container d-flex justify-content-center bg-parallax" id="main-header" style="background-image: url({%static '/assets/img/header_coinview.png'%});">
+                    <div class="row align-self-center" id="header">
+                        <div class="col-12 text-center">
+                            <h1 class="t-shadow parallax-right" data-speed="3">
+                                BLUEBIRD </h1>
+                            <div class="t-shadow hideOnScroll" data-speed="3">
+                                <div class="row justify-content-center hideOnScroll" data-speed="3">
+                                    <div class="col-7">
+                                        <i class="fas fa-tools"></i>
+                                        <div class="h2"></div>
+                                        {% if not users %}
+                                            <p class="h6">Faça login para Registrar suas Oportunidades</p>
+                                        {% else %}
+                                            <p class="h6">Registre suas Oportunidades</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fixed-bottom mb-2 f-center d-flex justify-content-center hideOnScroll">
+                                <p class="pointer d-flex align-items-end">
+                                    <i class="fas fa-chevron-down scroll fa-2x oscilator" data-scroll-to="main"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mask" id="mask-1"></div>
+                    <div class="mask" id="mask-2"></div>
+                </section>
+                <nav class="menu mt-4">
+
+                    {% include 'parciais/_nav.html' %}
+                </nav>

@@ -1,0 +1,42 @@
+@import 'simple-alerts-mixins';
+
+.simple-alert{    
+    position: fixed;
+    top: 100px;
+    z-index: 9999;
+    max-width: 80%;
+    left: 10%;
+    cursor: pointer;
+
+    >div{
+        max-width: 100%;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        align-content: center;
+        &:active{
+            transition: #{$default-transition} 100ms;
+            transform: scale(0.95);
+        }
+    }
+    .warn{
+        @include newAlert(orange);
+    }
+    .danger{
+        @include newAlert(orangered);
+    }
+    .success{
+        @include newAlert($success);
+    }
+
+    .simple-symbol{
+        display: flex;
+        i{
+            align-self: center;    
+        }
+    }
+
+    .simple-body{
+
+    }
+}

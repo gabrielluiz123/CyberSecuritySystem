@@ -1,0 +1,174 @@
+.form-control {
+    background: rgba($white, 0.08);
+    border-width: 1px;
+    border-color: $white-alpha-0;
+    transition: #{$default-transition} #{$default-transition-time};
+    border-radius: $border-radius-xs;
+    color: $white-alpha-2;
+
+    &:focus {
+        background: transparent;
+        color: $form-focus-fColor;
+    }
+}
+
+.sim-fcontrol {
+    input {
+        border-width: 0;
+        background: transparent;
+        color: $form-fColor;
+    }
+}
+
+//Radio and checkboxes Buttons
+.checkbox-btn,
+.radio-btn {
+    display: inline-block;
+    min-height: 23px;
+    min-width: 23px;
+    width: auto !important;
+    padding: 2px 3px;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-right: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: $gray;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked~.checkmark::after {
+            display: block;
+            content: "";
+        }
+    }
+
+    input:checked~.flag {
+        color: $brand-green;
+        font-weight: bold;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 40%;
+        margin-top: -10px;
+        left: 0;
+        height: 23px;
+        width: 23px;
+        background-color: transparent;
+        border: 3px solid $gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
+
+.radio-btn {
+    input {
+        &:checked~.checkmark {
+            @include checkmark-variant(transparent, $brand-green);
+        }
+    }
+
+    .checkmark {
+        border-radius: 50%;
+
+        &::after {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: $brand-green;
+        }
+    }
+}
+
+//checkbox
+.checkbox-btn {
+    input {
+        &:checked~.checkmark {
+            @include checkmark-variant($brand-green, transparent);
+        }
+    }
+
+    .checkmark {
+        &::after {
+            width: 5px;
+            height: 10px;
+            border: solid $white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+}
+
+//VARIANT CHECKMARKS
+.checkbox-btn {
+    &.check-success {
+        input {
+            &:checked~.checkmark {
+                @include checkmark-variant($success, $success);
+            }
+
+            &:checked~.flag {
+                color: $success !important;
+            }
+        }
+    }
+
+    &.check-warn {
+        input {
+            &:checked~.checkmark {
+                @include checkmark-variant($brand-orange, $brand-orange);
+            }
+
+            &:checked~.flag {
+                color: $brand-orange !important;
+            }
+        }
+    }
+}
+
+.radio-btn {
+    &.check-success {
+        input {
+            &:checked~.checkmark {
+                @include checkmark-variant(transparent, $success);
+            }
+
+            &:checked~.flag {
+                color: $success;
+            }
+        }
+    }
+
+    &.check-warn {
+        input {
+            &:checked~.checkmark {
+                @include checkmark-variant(transparent, $brand-orange);
+            }
+
+            &:checked~.flag {
+                color: $brand-orange;
+            }
+        }
+    }
+}

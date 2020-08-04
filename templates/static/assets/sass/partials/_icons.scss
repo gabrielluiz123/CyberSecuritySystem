@@ -1,0 +1,27 @@
+
+.absolute{
+    &.f-center{
+        left: 50%;
+        margin-left: -15px;
+    }
+    &.f-bottom{
+        bottom: 5%;
+    }
+    &.f-top{
+        top: 5%;
+    }
+}
+
+.chevron-icon-mm{
+    height: 45px;
+    width: 45px;
+    border-width: 4px 4px 0 0;
+    border-style: solid;
+    border-color: $white;
+    transform: rotate(45deg);
+}
+
+.prev-icon-mm{
+    transform: rotate(-135deg);
+}
+

@@ -1,0 +1,438 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+{% load static %}
+{% block 'titulo' %}Home {% endblock %}
+
+{% block content %}
+<section id="first-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
+                    <div class="container p-5" id="quem_somos">
+
+                        <div class="row">
+                            <div class="col-12 ml-2 text-center">
+                                {% if empresa == 'bluebird' %}
+                                        <h2 class="t-orange menu-title">Sobre a BLUEBIRD</h2>
+                                    {% elif empresa == 'chainway' %}
+                                        <h2 class="t-orange menu-title">Sobre a CHAINWAY</h2>
+                                {% elif empresa == 'zebra' %}
+                                        <h2 class="t-orange menu-title">Sobre a ZEBRA</h2>
+                                    {% endif %}
+                                <div class="divisor bg-grey mb-5 mt-3"></div>
+
+                                <!-- BEGIN MARKET JUMBOTRON-->
+                                <div class="row mt-5 justify-content-center">
+                                    <div class="col-sm-6 col-12 py-5 ">
+                                        <div class="f-concert-one t-gray font-18px text-justify">
+                                            {% if empresa == 'bluebird' %}
+                                                {% placeholder "TextoEsquerda" %}
+                                            {% elif empresa == 'chainway' %}
+                                                {% placeholder "TextoEsquerdaChainway" %}
+                                            {% elif empresa == 'zebra' %}
+                                                {% placeholder "TextoEsquerdaZebra" %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12 py-5  text-justify">
+                                        <div class="f-concert-one t-gray font-18px">
+                                           {% if empresa == 'bluebird' %}
+                                                {% placeholder "TextoDireita" %}
+                                            {% elif empresa == 'chainway' %}
+                                                {% placeholder "TextoDireitaChainway" %}
+                                            {% elif empresa == 'zebra' %}
+                                                {% placeholder "TextoDireitaZebra" %}
+                                            {% endif %}
+                                  </div>
+                                    </div>
+                                    <div class="col-sm-10 col-12 py-5 text-center ">
+                                        <div class="f-concert-one t-gray font-18px">
+                                            {% if empresa == 'bluebird' %}
+                                                {% placeholder "TextoAbaixo" %}
+                                            {% elif empresa == 'chainway' %}
+                                                {% placeholder "TextoAbaixoChainway" %}
+                                            {% elif empresa == 'zebra' %}
+                                                {% placeholder "TextoAbaixoZebra" %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                       <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</div>
+</section>
+<section id="produtos-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
+                    <div class="container p-5" id="produtos">
+                        <div class="row">
+                            <div class="col-12 ml-2 text-center">
+                                        <h2 style="color:white" class="t-orange menu-title">Produtos</h2>
+                            </div>
+                        </div>
+                        <div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+
+<style>
+.form-control2 {
+    width:25% !important;
+}
+.tooltip-inner {
+    background-color: #00cc00;
+}
+.tooltip.bs-tooltip-right .arrow:before {
+    border-right-color: #00cc00 !important;
+}
+.tooltip.bs-tooltip-left .arrow:before {
+    border-right-color: #00cc00 !important;
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+    border-right-color: #00cc00 !important;
+}
+.tooltip.bs-tooltip-top .arrow:before {
+    border-right-color: #00cc00 !important;
+}
+::placeholder { /* Firefox, Chrome, Opera */
+    color: white;
+}
+
+
+</style>
+  <!-- The slideshow -->
+
+
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+  <!-- Left and right controls -->
+
+</div>
+</div>
+    <!--<div class="carousel-inner" style="width:400px; height:200px;">
+                                    {% if empresa == 'bluebird' %}
+                                        {% placeholder "Carousel" %}
+                                    {% elif empresa == 'chainway' %}
+                                        {% placeholder "CarouselChainway" %}
+                                    {% endif %}
+                                </div> --!>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+      {% if empresa == 'bluebird' %}
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static '/assets/img/ef501r.png'%}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/ck100.png'%}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/ef401.png'%}" alt="Third slide">
+    </div>
+      {% elif empresa == 'chainway' %}
+      <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static '/assets/img/header_bluebird.JPG'%}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/CK100.JPG'%}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/EF401.JPG'%}" alt="Third slide">
+    </div>
+      <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/VF550.JPG'%}" alt="Fourth slide">
+    </div>
+      {% elif empresa == 'zebra' %}
+      <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static '/assets/img/header_bluebird.JPG'%}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/CK100.JPG'%}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/EF401.JPG'%}" alt="Third slide">
+    </div>
+      <div class="carousel-item">
+      <img class="d-block w-100" src="{% static '/assets/img/VF550.JPG'%}" alt="Fourth slide">
+    </div>
+      {% endif %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+                    </div>
+</section>
+{% if users %}
+    <section class="bg-dark t-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll" id="registro_oportunidade">
+              <div class="divisor bg-brand-light mb-5 mt-3"></div>
+        <div class="container p-5" id="contact">
+            <div class="section-mask bg-black-a"></div>
+            <div class="row justify-content-center">
+
+                <div class="col-8 ml-2 text-center">
+                    <h2 class="menu-title">Registre sua Oportunidade</h2><br>
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cliente Final</a>
+                            {% if not users %}
+                                <a class="nav-item nav-link" id="nav-profile-tab1" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Revenda</a>
+                            {%endif%}
+                            <a class="nav-item nav-link" id="nav-contact-tab1" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Informações do Projeto</a>
+                            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Equipamentos</a>
+                            <a class="nav-item nav-link" id="nav-about-vendedor-tab" data-toggle="tab" href="#nav-about-vendedor" role="tab" aria-controls="nav-about-vendedor" aria-selected="false">Vendedor</a>
+                        </div>
+                    </nav>
+                    <form action="#save_registro" method="POST">
+                        {% csrf_token %}
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                                        <div class="form-group f-concert-one d-flex flex-column vw-30 text-left">
+                                            <label>CNPJ: <br />
+                                                <input id="cnpj_cliente" name="cnpj_cliente"value="{{cnpj_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+
+                                            <label>Razão Social: <br />
+                                                <input id="razao_cliente" name="razao_cliente" value="{{razao_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+                                            <label>CEP: <br />
+                                                <input id="cep_cliente" name="cep_cliente" value="{{cep_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+                                            <label>Endereço: <br />
+                                                <input id="address_cliente" name="address_cliente" value="{{address_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+                                            <label>Cidade: <br />
+                                                <input id="city_cliente" name="city_cliente" value="{{city_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+                                            <label>UF: <br />
+                                                <select id="state_cliente" name="state_cliente" class="form-control shadow-none my-1">
+                                                    <option value="AC">Acre</option>
+                                                    <option value="AL">Alagoas</option>
+                                                    <option value="AP">Amapá</option>
+                                                    <option value="AM">Amazonas</option>
+                                                    <option value="BA">Bahia</option>
+                                                    <option value="CE">Ceará</option>
+                                                    <option value="DF">Distrito Federal</option>
+                                                    <option value="ES">Espírito Santo</option>
+                                                    <option value="GO">Goiás</option>
+                                                    <option value="MA">Maranhão</option>
+                                                    <option value="MT">Mato Grosso</option>
+                                                    <option value="MS">Mato Grosso do Sul</option>
+                                                    <option value="MG">Minas Gerais</option>
+                                                    <option value="PA">Pará</option>
+                                                    <option value="PB">Paraíba</option>
+                                                    <option value="PR">Paraná</option>
+                                                    <option value="PE">Pernambuco</option>
+                                                    <option value="PI">Piauí</option>
+                                                    <option value="RJ">Rio de Janeiro</option>
+                                                    <option value="RN">Rio Grande do Norte</option>
+                                                    <option value="RS">Rio Grande do Sul</option>
+                                                    <option value="RO">Rondônia</option>
+                                                    <option value="RR">Roraima</option>
+                                                    <option value="SC">Santa Catarina</option>
+                                                    <option value="SP">São Paulo</option>
+                                                    <option value="SE">Sergipe</option>
+                                                    <option value="TO">Tocantins</option>
+                                                    <option value="EX">Estrangeiro</option>
+                                                </select>
+                                            </label>
+                                            <label>Contato: <br />
+                                                <input id="contact_cliente" name="contact_cliente" value="{{contact_cliente}}" class="form-control shadow-none my-1" type="text" required>
+                                            </label>
+                                            <label>Faz parte de alguma rede? Qual?<br />
+                                                <input id="rede_cliente" name="rede_cliente" value="{{rede_cliente}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>Telefone: <br />
+                                                <input id="phone_cliente" name="phone_cliente" value="{{phone_cliente}}" class="form-control shadow-none my-1" type="tel" required>
+                                            </label>
+                                            <label>E-mail: <br />
+                                                <input id="email_cliente" name="email_cliente" value="{{email_cliente}}" class="form-control shadow-none my-1" type="email" required>
+                                            </label>
+                                            {% if users %}
+                                                <a onclick="clickClienteL()" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" class="btn btn-success">Próximo!</a>
+                                            {% else %}
+                                                <a onclick="clickCliente()" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" class="btn btn-success">Próximo!</a>
+                                            {% endif %}
+                                        </div>
+                        </div>
+                        {% if not users %}
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                             <div class="form-group f-concert-one d-flex flex-column vw-30 text-left">
+                                            <label>CNPJ: <br />
+                                                <input onchange="consultaCNPJRV()" id="cnpj_revenda" name="cnpj_revenda" value="{{cnpj_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>Razão Social: <br />
+                                                <input id="razao_revenda" name="razao_revenda" value="{{razao_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+
+                                            <label>CEP: <br />
+                                                <input id="cep_revenda" name="cep_revenda" value="{{cep_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>Endereço: <br />
+                                                <input id="address_revenda" name="address_revenda" value="{{address_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>Cidade: <br />
+                                                <input id="city_revenda" name="city_revenda" value="{{city_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>UF: <br />
+                                                <select id="state_revenda" name="state_revenda" class="form-control shadow-none my-1">
+                                                    <option value="AC">Acre</option>
+                                                    <option value="AL">Alagoas</option>
+                                                    <option value="AP">Amapá</option>
+                                                    <option value="AM">Amazonas</option>
+                                                    <option value="BA">Bahia</option>
+                                                    <option value="CE">Ceará</option>
+                                                    <option value="DF">Distrito Federal</option>
+                                                    <option value="ES">Espírito Santo</option>
+                                                    <option value="GO">Goiás</option>
+                                                    <option value="MA">Maranhão</option>
+                                                    <option value="MT">Mato Grosso</option>
+                                                    <option value="MS">Mato Grosso do Sul</option>
+                                                    <option value="MG">Minas Gerais</option>
+                                                    <option value="PA">Pará</option>
+                                                    <option value="PB">Paraíba</option>
+                                                    <option value="PR">Paraná</option>
+                                                    <option value="PE">Pernambuco</option>
+                                                    <option value="PI">Piauí</option>
+                                                    <option value="RJ">Rio de Janeiro</option>
+                                                    <option value="RN">Rio Grande do Norte</option>
+                                                    <option value="RS">Rio Grande do Sul</option>
+                                                    <option value="RO">Rondônia</option>
+                                                    <option value="RR">Roraima</option>
+                                                    <option value="SC">Santa Catarina</option>
+                                                    <option value="SP">São Paulo</option>
+                                                    <option value="SE">Sergipe</option>
+                                                    <option value="TO">Tocantins</option>
+                                                    <option value="EX">Estrangeiro</option>
+                                                </select>
+                                            </label>
+                                            <label>Contato: <br />
+                                                <input id="contact_revenda" name="contact_revenda" value="{{contact_revenda}}" class="form-control shadow-none my-1" type="text">
+                                            </label>
+                                            <label>Telefone: <br />
+                                                <input id="phone_revenda" name="phone_revenda" value="{{phone_revenda}}" class="form-control shadow-none my-1" type="tel">
+                                            </label>
+                                            <label>E-mail: <br />
+                                                <input id="email_revenda" name="email_revenda" value="{{email_revenda}}" class="form-control shadow-none my-1" type="email">
+                                            </label>
+                                            <a onclick="clickC()" id="nav-contact-tab2" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" class="btn btn-success">Próximo!</a>
+                                        </div>
+                        </div>
+                        {%endif%}
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                             <div class="form-group f-concert-one d-flex flex-column vw-30 text-left">
+                                <label>Aplicação: <br />
+                                    <textarea name="aplication_projeto"  class="form-control shadow-none my-1" required>{{aplication_projeto}}</textarea>
+                                </label>
+                                 <label>Especificação Técnica Solicitada<br />
+                                    <textarea name="esp_projeto" class="form-control shadow-none my-1" required>{{esp_projeto}}</textarea>
+                                </label>
+                                  <label>Já foi feito homologação?<br />
+                                    <input type="radio" name="homologa_projeto" value="sim">
+                                      <label for="sim">Sim</label><br>
+                                     <input type="radio" name="homologa_projeto" checked value="nao">
+                                      <label for="nao">Não</label><br>
+                                </label>
+                                 <label>O cliente já utiliza coletor de dados? Se sim, qual modelo e quantidade?<br />
+                                    <textarea name="colet_projeto" class="form-control shadow-none my-1" required>{{colet_projeto}}</textarea>
+                                </label>
+                                 <label>Parceiro de software<br />
+                                    <textarea name="parc_projeto" class="form-control shadow-none my-1" required>{{parc_projeto}}</textarea>
+                                </label>
+                                 <label>Data prevista para conclusão<br />
+                                    <input type="date" value="{{concl_projeto}}" name="concl_projeto" class="form-control shadow-none my-1" required>
+                                </label>
+                                 <label>Informações adicionais<br />
+                                    <textarea name="info_projeto" class="form-control shadow-none my-1" required>{{info_projeto}}</textarea>
+                                </label>
+                                 <a onclick="clickInfo()" id="nav-about-tab1" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" class="btn btn-success">Próximo!</a>
+                             </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                            <div class="form-group f-concert-one d-flex flex-column vw-30 text-left">
+                                <label><br><b>Equipamentos:</b></label><br />
+                                    <table ALIGN=center id="tbpn">
+                                        <tr>
+                                            <th valign="center"><label style="color: white">Part Number</label></th>
+                                            <th valign="center"><label style="color: white">Descrição</label></th>
+                                            <th valign="center"><label style="color: white">Quantidade</label></th>
+                                            <th valign="center"><label style="color: white">Valor</label></th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" name="pn_projeto0" id="pn_projeto0" class="form-control shadow-none my-1" required></td>
+                                            <td><input type="text" name="desc_projeto0" id="desc_projeto0" class="form-control shadow-none my-1" required></td>
+                                            <td><input type="text" name="qty_projeto0" id="qty_projeto0" class="form-control shadow-none my-1" required></td>
+                                            <td><input type="text" name="value_projeto0" id="value_projeto0" class="form-control shadow-none my-1" required></td>
+                                            <td><a style="color: white;" id="btn_pn0" class="btn btn-danger" onclick="rm_pn(0)">X</a></td>
+                                        </tr>
+                                    </table>
+                                <br><a class="btn btn-success" onclick="add()">Adicionar PN!</a>
+                                <br>
+                                <label><br><b>Acessórios:</b></label><br />
+                                    <table ALIGN=center id="tbac">
+                                        <tr>
+                                            <th valign="center"><label style="color: white">Part Number</label></th>
+                                            <th valign="center"><label style="color: white">Descrição</label></th>
+                                            <th valign="center"><label style="color: white">Quantidade</label></th>
+                                            <th valign="center"><label style="color: white">Valor</label></th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" name="ac_pn_projeto0" id="ac_pn_projeto0" class="form-control shadow-none my-1"></td>
+                                            <td><input type="text" name="ac_desc_projeto0" id="ac_desc_projeto0" class="form-control shadow-none my-1"></td>
+                                            <td><input type="text" name="ac_qty_projeto0" id="ac_qty_projeto0" class="form-control shadow-none my-1"></td>
+                                            <td><input type="text" name="ac_value_projeto0" id="ac_value_projeto0" class="form-control shadow-none my-1"></td>
+                                            <td><a style="color: white;" id="ac_btn_pn0" class="btn btn-danger" onclick="rm_ac(0)">X</a></td>
+                                        </tr>
+
+                                    </table>
+                                <br><a class="btn btn-success" onclick="add_ac()">Adicionar Acessório!</a>
+                                <br><a onclick="clickEquip()" id="nav-about-vendedor-tab1" data-toggle="tab" href="#nav-about-vendedor" role="tab" aria-controls="nav-about-vendedor" class="btn btn-success">Próximo!</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-about-vendedor" role="tabpanel" aria-labelledby="nav-about-vendedor-tab">
+                            <div class="form-group f-concert-one d-flex flex-column vw-30 text-left">
+                                <label>Vendedor: <br />
+                                    <select name="vendedor" class="form-control shadow-none my-1">
+                                        {% for vendedor in vendedores %}
+                                            {% if not vendedor.is_gerente %}
+                                                {% if vendedor.id == vendedor %}
+                                                    <option value="{{vendedor.id}}" selected>{{vendedor.nome}}</option>
+                                                {% else %}
+                                                    <option value="{{vendedor.id}}" selected>{{vendedor.nome}}</option>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                                <br><button type="submit" class="btn btn-success">Enviar Registro!</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+{% endblock content %}

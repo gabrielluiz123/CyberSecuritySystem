@@ -1,0 +1,50 @@
+{% load static %}
+<div class="container">
+                        <div class="row">
+                            <!-- Este menu é personalizado para pagina única e utiliza um script para listar os nomes
+     das seções e programar o smooth scrool até elas. Caso saiba o que fazer e deseje modificar
+     o script, acesse assets/js/partials/section-list-menu.js. Entenda que, para utilizar deste menu
+     deve-se seguir o modelo da página contida em app/pages/section-list.php-->
+                            <div class="col-3 d-flex align-items-center">
+                                <ul id="menu_left" class="m-0 d-sm-flex pt-5 py-sm-0 px-0 px-sm-3 align-items-center">
+                                    <li class="menu-item logo"><a href="{% url 'index' %}"><img src="{% static '/assets/img/logo/logo_white.png'%}"></a></li>
+                                </ul>
+                            </div>
+                                <ul id="menu_right" class="menu  m-0 d-none d-sm-flex pt-5 py-sm-0 px-0 px-sm-3 align-items-center justify-content-end list-sections">
+                                   {% if users %}
+                                    <form class="form-inline my-2 my-lg-0 ml-lg-4" action="{% url 'post_busca' %}">
+                                        <input name="termo" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search" placeholder="Pesquisar"
+                                               aria-label="Search">
+                                    </form>
+                                    {% endif %}
+                                    <a style="background-color: transparent !important; border-color: transparent;" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menu
+                                    </a>
+                              <div class="dropdown-menu"  aria-labelledby="dropdownMenuLink">
+                                  {% if users and not vendedor_gerente%}
+                                    <a class="dropdown-item" href="{% url 'detalhes' %}">Meus Registros </a>
+                                  {% endif %}
+                                  {% if vendedor_gerente %}
+                                    <a class="dropdown-item" href="{% url 'detalhes' %}">Meus Registros <span class="badge badge-light">{{number_registro}}</span></a>
+                                    <a class="dropdown-item" href="{% url 'detalhes' %}">Layout</a>
+                                  {% endif %}
+                                 {% if not users %}
+                                   <div class="dropdown-item"  data-toggle="modal" data-target="#login_modal" >
+                                    <a class="" id="btnLogin">
+                                        Entrar
+                                    </a>
+                                </div>
+                                 <div class="dropdown-item"  data-toggle="modal" data-target="#cadastrar_modal" >
+                                    Cadastrar
+                                </div>
+                                {%else%}
+                                    <a href="{% url 'logout' %}" class="dropdown-item" id="btnLogout">
+                                        Sair
+                                    </a>
+                                {%endif%}
+                              </div>
+                                    <li class="menu-item p-3 scroll" data-scroll-to="home">Início</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>

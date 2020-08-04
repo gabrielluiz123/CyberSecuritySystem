@@ -1,0 +1,65 @@
+.t-{
+    &shadow{
+        text-shadow: 0 0 0.4em $grey;
+    }
+}
+.b{
+    border-width: $default_border_width;
+    &-{
+        &shadow{
+            box-shadow: 0 0 0.5em $black !important;
+        }
+        &dashed{
+            border-style: dashed;
+        }
+        &medium{
+            border-width: $medium_border_width;
+        }
+        &thin{
+            border-width: $thin_border_width;
+        }
+        &top{
+            border-width: 2px 0 0 0 !important;
+        }
+        &right{
+            border-width: 0 2px 0 0 !important;
+        }
+        &bottom{
+            border-width: 0 0 2px 0 !important;
+        }
+        &left{
+            border-width: 0 0 0 2px !important;
+        }
+    }
+}
+
+.shadow{
+    box-shadow: .01em .01em 0.4em rgba(168, 168, 168, 0.25);
+    transition: #{$default-transition-time} #{$default-transition};
+}
+.shadow:hover{
+    box-shadow: .01em .01em 1.2em rgba(168, 168, 168, 0.25);
+}
+.rounded-3px{
+    border-radius: 3px;
+}
+.rounded-5px{
+    border-radius: 5px;
+}
+.rounded-10px{
+    border-radius: 10px;
+}
+.rounded-25px{
+    border-radius: 25px;
+}
+.no-border{
+    border: none;
+}
+.rounded-sub{
+    .b{
+        border-radius: 15px;
+    }
+}
+.rounded-0{
+    border-radius: 0px !important;
+}
