@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages, auth
 from django.utils import timezone
+from .models import Usuario
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 
@@ -118,11 +119,17 @@ class Index(View):
             senha = request.POST.get('pwd')
             senha2 = request.POST.get('pwd2')
 
+            if senha != senha2:
+                messages.error(request, 'Senhas não correspondem!')
+                return render(request, self.template_name, self.contexto)
             if User.objects.filter(email=email).exists():
                 messages.error(request, 'Email já existe')
+                return render(request, self.template_name, self.contexto)
             user = User.objects.create_user(username=email, email=email, password=senha, first_name=nome)
+            user_u = Usuario(nome=nome, user=user, pontos=0)
             try:
                 user.save()
+                user_u.save()
             except:
                 messages.error(request, 'Falha ao se cadastrar! Contacte o administrador do site!')
                 return render(request, self.template_name, self.contexto)

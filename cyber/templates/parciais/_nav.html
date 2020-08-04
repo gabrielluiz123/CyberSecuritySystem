@@ -26,6 +26,9 @@
 
                               <div class="dropdown-menu"  aria-labelledby="dropdownMenuLink">
                                   <a class="dropdown-item" href="{% url 'index' %}">Página Inicial</a>
+                                  <a href="{% url 'ranking' %}" class="dropdown-item" id="btnLogout">
+                                        Ranking
+                                    </a>
                                 {%if users %}
                                     <a href="{% url 'logout' %}" class="dropdown-item" id="btnLogout">
                                         Sair

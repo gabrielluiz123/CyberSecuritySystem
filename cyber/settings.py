@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ranking',
+    'system',
     'defense',
     'cyber',
     'attack',
