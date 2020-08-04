@@ -26,23 +26,6 @@
 
                               <div class="dropdown-menu"  aria-labelledby="dropdownMenuLink">
                                   <a class="dropdown-item" href="{% url 'index' %}">Página Inicial</a>
-                                  {% if users and not vendedor_gerente%}
-                                      {% if revenda_gerente%}
-                                          <div class="dropdown-item"  data-toggle="modal" data-target="#cadastrar_modal" >
-                                            Cadastrar Usuário
-                                        </div>
-                                      {% endif %}
-                                    <a class="dropdown-item" href="{% url 'detalhes' %}#registro_oportunidade">Meus Registros </a>
-                                    <a class="dropdown-item" href="{% url 'renovacoes' %}">Renovações <span class="badge badge-light">{{number_renovacao}}</span></a>
-                                  {% endif %}
-                                  {% if vendedor_gerente %}
-                                    <a class="dropdown-item" href="{% url 'detalhes' %}#registro_oportunidade">Meus Registros <span class="badge badge-light">{{number_registro}}</span></a>
-                                    <a class="dropdown-item" href="{% url 'detalhes_aguardando' %}#registro_oportunidade">Aguardando Análise <span class="badge badge-light">{{number_registro}}</span></a>
-                                    <a class="dropdown-item" href="{% url 'detalhes_reprovados' %}#registro_oportunidade">Registros Reprovados <span class="badge badge-light"></span></a>
-                                    <a class="dropdown-item" href="{% url 'detalhes_aprovados' %}#registro_oportunidade">Registros Aprovados <span class="badge badge-light"></span></a>
-                                    <a class="dropdown-item" href="{% url 'renovacoes' %}">Renovações <span class="badge badge-light">{{number_renovacao}}</span></a>
-                                    <a class="dropdown-item" href="{% url 'aprovar_revenda' %}">Aprovar Revenda <span class="badge badge-light">{{number_user_revenda}}</span></a>
-                                  {% endif %}
                                 {%if users %}
                                     <a href="{% url 'logout' %}" class="dropdown-item" id="btnLogout">
                                         Sair
