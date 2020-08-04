@@ -6,8 +6,85 @@ from django.contrib.auth.models import User
 from django.core.validators import validate_email
 
 
+class IndexJogar(View):
+    model = 'system'
+    template_name = 'jogar_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+        self.contexto = {
+            'users': request.user.is_authenticated,
+            'nome': nome,
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
+
+class IndexBrute(View):
+    model = 'system'
+    template_name = 'brute_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+        self.contexto = {
+            'users': request.user.is_authenticated,
+            'nome': nome,
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
+
+class IndexDdos(View):
+    model = 'system'
+    template_name = 'ddos_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+        self.contexto = {
+            'users': request.user.is_authenticated,
+            'nome': nome,
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
+
+class IndexSql(View):
+    model = 'system'
+    template_name = 'sql_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+        self.contexto = {
+            'users': request.user.is_authenticated,
+            'nome': nome,
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
+
+
 class Index(View):
-    model = 'Registro'
+    model = 'system'
     template_name = 'sidebar_left.html'
 
     def setup(self, request, *args, **kwargs):

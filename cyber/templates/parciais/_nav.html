@@ -7,7 +7,7 @@
      deve-se seguir o modelo da página contida em app/pages/section-list.php-->
                             <div class="col-3 d-flex align-items-center">
                                 <ul id="menu_left" class="m-0 d-sm-flex pt-5 py-sm-0 px-0 px-sm-3 align-items-center">
-                                        <li class="menu-item logo"><a href="{% url 'index' %}"><img style="max-width: 85px !important; height:auto important; " src="{% static '/assets/img/logo/logo_white.png'%}"></a></li>
+                                        <li class="menu-item logo"><a href="{% url 'index' %}"><img style="max-width: 50px !important; height:auto important; " src="{% static '/assets/img/logo/logo_white.png'%}"></a></li>
 
                                 </ul>
                             </div>
@@ -40,7 +40,9 @@
                                             Entrar/Cadastrar
                                         </li></a>
                                     {% endif %}
-                                    <a href="https://primeinterway.com/{{empresa}}"><li class="menu-item p-3" >Comprar</li></a>
+                                    {% if users %}
+                                        <a href="{% url 'jogar_index' %}"><li class="menu-item p-3" >Jogar</li></a>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>

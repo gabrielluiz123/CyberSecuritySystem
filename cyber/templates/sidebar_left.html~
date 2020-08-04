@@ -103,17 +103,17 @@ $(document).ready(function(){
   </ol>
   <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="{% url 'ddos_index' %}" target="_blank">
+        <a href="https://primeinterway.com/pt-br/produto/coletor-de-dados-vf550/" target="_blank">
       <img style="max-height: 500px !important; width: 100% !important;" class="d-block w-100" src="{% static '/assets/img/ddos.png'%}" alt="First slide">
         </a>
     </div>
       <div class="carousel-item">
-        <a href="{% url 'sql_index' %}" target="_blank">
+        <a href="https://primeinterway.com/pt-br/produto/coletor-de-dados-ef500r-e-ef501r/" target="_blank">
       <img style="max-height: 500px !important; width: 100% !important;" class="d-block w-100" src="{% static '/assets/img/sql_injection.png'%}" alt="Second slide">
         </a>
     </div>
       <div class="carousel-item">
-        <a href="{% url 'brute_index' %}" target="_blank">
+        <a href="https://primeinterway.com/pt-br/produto/leitor-rfid-uhf-rfr900/" target="_blank">
       <img style="max-height: 500px !important; width: 100% !important;" class="d-block w-100" src="{% static '/assets/img/bruteforce.jpg'%}" alt="Thirth slide">
         </a>
     </div>
