@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views import View
-from system.models import Usuario
+from system.models import Usuario, Url
 
 class Index(View):
     model = 'system'
@@ -8,6 +8,7 @@ class Index(View):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
@@ -20,13 +21,13 @@ class Index(View):
             i = i + 1
             if u.user == request.user:
                 break
-
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
             'usuarios':usuarios,
             'eu':eu,
             'i':i,
+            'url': url,
         }
 
     def get(self, request, *args, **kwargs):
