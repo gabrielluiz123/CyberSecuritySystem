@@ -34,6 +34,7 @@ class Jogos(models.Model):
     inicio_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Inicio do Game")
     fim_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Fim do Game")
     Finalizado = models.BooleanField(default=False, verbose_name="Finalizado")
+    desafiado = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='iniciador', verbose_name="Desafiado", null=True)
 
     def __str__(self):
         return self.name
