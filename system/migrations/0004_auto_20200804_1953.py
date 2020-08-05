@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='jogo',
             name='fim_jogo',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Fim do Jogo'),
+            field=models.DateTimeField(blank=True, null=True, verbose_name='Fim do Game'),
         ),
         migrations.AddField(
             model_name='jogo',
             name='inicio_jogo',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Inicio do Jogo'),
+            field=models.DateTimeField(blank=True, null=True, verbose_name='Inicio do Game'),
         ),
     ]

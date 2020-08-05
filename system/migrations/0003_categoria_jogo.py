@@ -20,10 +20,10 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Jogo',
+            name='Game',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='Jogo', max_length=255, verbose_name='Nome')),
+                ('name', models.CharField(default='Game', max_length=255, verbose_name='Nome')),
                 ('date_created', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Data de criação')),
                 ('aceite', models.BooleanField(default=False, verbose_name='Aceite')),
                 ('iniciado', models.BooleanField(default=False, verbose_name='Iniciado')),

@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages, auth
 from django.utils import timezone
+from .models import Jogo, Categoria
 from .models import Usuario
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
@@ -13,6 +14,7 @@ class IndexJogar(View):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        categorias = Categoria.objects.all()
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
@@ -20,6 +22,7 @@ class IndexJogar(View):
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
+            'categorias': categorias,
         }
 
     def get(self, request, *args, **kwargs):

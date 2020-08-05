@@ -22,7 +22,7 @@ class Categoria(models.Model):
 
 
 class Jogo(models.Model):
-    name = models.CharField(max_length=255, default='Jogo', verbose_name="Nome")
+    name = models.CharField(max_length=255, default='Game', verbose_name="Nome")
     date_created = models.DateTimeField(default=timezone.now, verbose_name="Data de criação")
     user_attack = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_attack', verbose_name="Usuário de Ataque")
     user_defense = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_defense', verbose_name="Usuário de Defesa")
@@ -31,8 +31,8 @@ class Jogo(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name="Categoria")
     aceite = models.BooleanField(default=False, verbose_name="Aceite")
     iniciado = models.BooleanField(default=False, verbose_name="Iniciado")
-    inicio_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Inicio do Jogo")
-    fim_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Fim do Jogo")
+    inicio_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Inicio do Game")
+    fim_jogo = models.DateTimeField(null=True, blank=True, verbose_name="Fim do Game")
     Finalizado = models.BooleanField(default=False, verbose_name="Finalizado")
 
 
