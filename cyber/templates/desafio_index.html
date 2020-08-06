@@ -10,57 +10,81 @@
                             <div class="col-12 ml-2 text-center">
                                 <h2 class="t-orange menu-title">Instruções do Desafio</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
-                                {% if categoria.nome == 'SQL Injection' %}
-                                    <p>Defenda nosso servidor de ataques de SQL Injection e ganhe pontos para subir de ranking!</p>
-                                    <p>Desafie usuários a atacar o servidor que você irá defender!</p>
-                                    <p>Fique atento a resposta do usuário, assim que ele aceitar o jogo irá começar!</p>
+                                {% if url == 'defesa' %}
+                                    {% if categoria.nome == 'SQL Injection' %}
+                                        <p>O desafio irá durar 1 hora!</p>
+                                        <p>Você que proteger nossa aplicação contra ataques de SQL Injection (INSERT, DELETE, UPDATE, SELECT) durante o desafio!</p>
+                                        <p>Quanto mais tempo defender, mais pontos ganhará!</p>
+                                        <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
+                                    {% endif %}
+                                Hora de Inicio:<br> {{desafio.inicio_jogo.hour}}:{{desafio.inicio_jogo.minute}}<br>
+                                Hora de Fim: <div id="date_fim">{{desafio.fim_jogo.hour}}:{{desafio.fim_jogo.minute}}</div><br>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                                    Tempo Restante: <div id="sessao"></div>
+
+                                    <script language="javascript">
+var tempo = new Number();
+  // Tempo em segundos
+            console.log(document.getElementById('date_fim').innerHTML);
+            var hms = document.getElementById('date_fim').innerHTML;
+            var a  = hms.split(':');
+            var minutes = (+a[0]) * 60 + (+a[1]);
+            var d = new Date();
+            var n = d.getHours();
+            var m = d.getMinutes();
+            var at = n+":"+m;
+            var b  = at.split(':');
+            var minutes_at = (+b[0]) * 60 + (+b[1]);
+            var mm = (parseInt(minutes) - parseInt(minutes_at))*60;
+            console.log(mm);
+  tempo = mm;
+  function startCountdown(){
+
+
+    // Se o tempo não for zerado
+    if((tempo - 1) >= 0){
+
+      // Pega a parte inteira dos minutos
+      var min = parseInt(tempo/60);
+      // Calcula os segundos restantes
+      var seg = tempo%60;
+
+      // Formata o número menor que dez, ex: 08, 07, ...
+      if(min < 10){
+        min = "0"+min;
+        min = min.substr(0, 2);
+      }
+      if(seg <=9){
+        seg = "0"+seg;
+      }
+
+      // Cria a variável para formatar no estilo hora/cronômetro
+      horaImprimivel = '00:' + min + ':' + seg;
+      //JQuery pra setar o valor
+      $("#sessao").html(horaImprimivel);
+
+      // Define que a função será executada novamente em 1000ms = 1 segundo
+      setTimeout('startCountdown()',1000);
+
+      // diminui o tempo
+      tempo--;
+
+      // Quando o contador chegar a zero faz esta ação
+    } else {
+      window.open('../controllers/logout.php', '_self');
+    }
+
+  }
+
+  // Chama a função ao carregar a tela
+  startCountdown();
+</script>
+
+                                    </div>
                                 {% endif %}
-                                <div data-toggle="modal" data-target="#desafiar_modal_sql" >
-                                            <a class="btn btn-primary" id="btnRenovacao">
-                                                Desafiar Oponente
-                                            </a>
-                                </div>
                             </div>
                         </div>
                     </div>
 </section>
-{% if users %}
-            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafiar_modal_sql">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Desafiar</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                  <table style="width:100%">
-                                      {% for usuario in usuarios %}
-                                      <tr>
-                                        <td>{{usuario.nome}}</td>
-                                        <td><a href="{% url 'desafiar' usuario.id 2 %}"><button type="button" class="btn btn-success">Desafiar</button></a><br></td>
-                                      </tr>
-                                      {% endfor %}
-                                    </table>
-                                <div class="col-sm">
-                                  <div class="row justify-content-center">
-                                <div class="col-auto">
 
-
-                                </div>
-                            </div>
-                                </div>
-
-                              </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
 {% endblock 'conteudo' %}

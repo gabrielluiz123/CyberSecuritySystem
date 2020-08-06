@@ -213,6 +213,7 @@ class AceitarDesafio(View):
             'number': desafios_1,
             'desafios': desafios_noti,
             'categoria': categoria,
+            'desafio': desafio,
         }
 
     def get(self, request, *args, **kwargs):
