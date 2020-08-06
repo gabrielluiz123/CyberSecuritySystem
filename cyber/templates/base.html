@@ -184,7 +184,60 @@
     </form>
             </div>
             {%endif%}
+            {% if users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafios_noti">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Desafios</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <table style="width:100%">
+                                      {% for desafio in desafios %}
+                                      <thead>
+                                      <th>Desafiante</th>
+                                      <th>Defesa</th>
+                                      <th>Ataque</th>
+                                      <th>Categoria</th>
+                                      </thead>
+                                      <tr>
+                                          {% if url == 'defesa' %}
+                                            <td>{{desafio.user_attack}}</td>
+                                            <td>{{desafio.user_attack.pontos_defesa}}</td>
+                                            <td>{{desafio.user_attack.pontos_ataque}}</td>
+                                          {% elif url == 'ataque' %}
+                                            <td>{{desafio.user_defense}}</td>
+                                            <td>{{desafio.user_defense.pontos_defesa}}</td>
+                                            <td>{{desafio.user_defense.pontos_ataque}}</td>
+                                          {% endif %}
+                                            <td>{{desafio.categoria}}</td>
+                                        <td><a href="{% url 'aceitar_desafio' desafio.id %}"><button type="button" class="btn btn-success">Aceitar</button></a><br></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
 
+
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
          {% if revenda_gerente %}
             <div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_modal">
                 <div class="modal-dialog" role="document">

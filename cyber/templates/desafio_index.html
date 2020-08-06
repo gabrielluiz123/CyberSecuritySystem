@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'titulo' %}Desafio {% endblock %}
+
+{% block 'conteudo' %}
+<section id="first-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
+                    <div class="container p-5" id="quem_somos">
+
+                        <div class="row">
+                            <div class="col-12 ml-2 text-center">
+                                <h2 class="t-orange menu-title">Instruções do Desafio</h2>
+                                <div class="divisor bg-grey mb-5 mt-3"></div>
+                                {% if categoria.nome == 'SQL Injection' %}
+                                    <p>Defenda nosso servidor de ataques de SQL Injection e ganhe pontos para subir de ranking!</p>
+                                    <p>Desafie usuários a atacar o servidor que você irá defender!</p>
+                                    <p>Fique atento a resposta do usuário, assim que ele aceitar o jogo irá começar!</p>
+                                {% endif %}
+                                <div data-toggle="modal" data-target="#desafiar_modal_sql" >
+                                            <a class="btn btn-primary" id="btnRenovacao">
+                                                Desafiar Oponente
+                                            </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+{% if users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafiar_modal_sql">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Desafiar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <table style="width:100%">
+                                      {% for usuario in usuarios %}
+                                      <tr>
+                                        <td>{{usuario.nome}}</td>
+                                        <td><a href="{% url 'desafiar' usuario.id 2 %}"><button type="button" class="btn btn-success">Desafiar</button></a><br></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+{% endblock 'conteudo' %}

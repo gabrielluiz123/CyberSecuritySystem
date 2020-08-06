@@ -8,4 +8,5 @@ urlpatterns = [
     path('/SQL', views.IndexSQL.as_view(), name='jogar_sql'),
     path('/Brute', views.IndexBrute.as_view(), name='jogar_brute'),
     path('/Desafio_sql/<int:pk>,<int:cat>', views.Desafiar.as_view(), name='desafiar'),
+    path('/Aceitar_Desafio/<int:pk>', views.AceitarDesafio.as_view(), name='aceitar_desafio'),
 ]
