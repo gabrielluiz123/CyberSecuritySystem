@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block 'titulo' %}BruteForce {% endblock %}
+{% block 'titulo' %}SQL Injection {% endblock %}
 
 {% block 'conteudo' %}
 <section id="first-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
@@ -8,8 +8,118 @@
 
                         <div class="row">
                             <div class="col-12 ml-2 text-center">
-                                <h2 class="t-orange menu-title">Entenda SQL INJECTION</h2>
+                                <h2 class="t-orange menu-title">Entenda SQL Injection</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #fffff;
+  width: 30%;
+  height: 300px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #00aeef;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+}
+</style>
+</head>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">O Ataque</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Consequências</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Prevenção</button>
+  <button class="tablinks" onclick="openCity(event, 'Links')">Links Úteis</button>
+</div>
+
+<div style="overflow:auto" id="London" class="tabcontent">
+  <br><h3>SQL Injection</h3><br>
+  <p>Brute Force ou Ataque de Fordça Bruta é um ataque que faz exaustivos testes até encontrar a senha ou chave que está procurando.</p>
+  <p>Utilizado principalmente para a quebra de senhas e criptografias, porém quanto maior a complexidade do objeto a ser quebrado, maior o gasto de processamento e de tempo do ataque.</p>
+  <p>Pode ser feita de maneira manual, digitando a senha e o login diversas vezes manualmente, ou de maneira automática, por meio de um algoritmo que efetue várias tentativas em um curto periodo de tempo.</p>
+  <p>Na utilização de algoritmos, são utilizados 'words lists' para auxiliar o programa a quebrar a senha mais rapidamente.</p>
+</div>
+
+<div style="overflow:auto" id="Paris" class="tabcontent">
+  <br><h3>Principais Consequências</h3><br>
+  <p>Quando um ataque de força bruta é executado com sucesso em um sistema, o atacante ganha todas as permissões do usuário atacado dentro do sistema.</p>
+  <p>Tendo as permissões, terá acesso a todas as informações que o usuário tem dentro do sistema, dependendo da confidencialidade das informações e do nível de permissão do usuário, as consequências serão catastróficas.</p>
+  <p>Desde o vazamento de informações confidenciais até a estabilidade do sistema pode ser comprometida se a senha quebrada for de um administrador do sistema por exemplo</p>
+  <p>Até mesmo o vazamento de informações e dados pessoais, no caso de invasões de redes sociais ou de computadores pessoais.</p>
+</div>
+
+<div style="overflow:auto" id="Tokyo" class="tabcontent">
+  <br><h3>Como Previnir</h3><br>
+  <p>Existem várias maneiras de prevenção contra BruteForce que o usuário pode adotar para se proteger, como:</p>
+    <li>Não utilizar a mesma senha em diversos sistemas</li>
+    <li>Não colocar palavras relacionadas a você nas senhas</li>
+    <li>Utilizar senhas complexas compostas por letras, números e caracteres especiais</li>
+</div>
+
+<div style="overflow:auto" id="Links" class="tabcontent">
+  <br><h3>Links Úteis</h3><br>
+  <p>Para efetuar testes de senhas: <a style="color: blue" href="https://testedesenha.com.br/">https://testedesenha.com.br/</a></p>
+  <p>Artigo sobre senhas: <a style="color: blue" href="https://blogac.me/por-que-a-complexidade-das-senhas-e-tao-importante-para-sua-organizacao/">https://blogac.me/</a></p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+                                </div>
                             </div>
                         </div>
                     </div>
