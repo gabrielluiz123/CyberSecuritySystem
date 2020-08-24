@@ -5,7 +5,18 @@ from django.utils import timezone
 from system.models import Usuario, Categoria, Jogos, Url
 from django.contrib.auth.models import User
 from datetime import *
+import pymysql.cursors
 
+conexao = pymysql.connect(
+    host='127.0.0.1',
+    user='root',
+    password='',
+    db='sitedjango',
+    charset='utf8mb4',
+    cursorclass=pymysql.cursors.DictCursor
+)
+
+cursor = conexao.cursor()
 
 
 class Index(View):
@@ -195,18 +206,69 @@ class AceitarDesafio(View):
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
         pk_desafio = self.kwargs.get('pk')
         desafio = Jogos.objects.get(pk=pk_desafio)
-        if not desafio.aceite:
+        if desafio.aceite:
             desafio.aceite = True
             desafio.iniciado = True
             desafio.inicio_jogo = datetime.now()
             desafio.fim_jogo = datetime.now() + timedelta(hours=1)
             desafio.save()
+            print("AQUIIIIIIIIIIIIIIIIIIIIIIII")
+            cursor.execute(f'INSERT INTO contatos_contato (desafio_id, nome, sobrenome, telefone) values ({pk_desafio}, "DEsafio", "Ataque", "1222")')
+            conexao.commit()
+            print(cursor.rowcount, "Record inserted successfully into Laptop table")
         categoria = desafio.categoria
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
         self.contexto = {
+            'desafio_id': desafio.id,
+            'users': request.user.is_authenticated,
+            'nome': nome,
+            'url': url,
+            'number': desafios_1,
+            'desafios': desafios_noti,
+            'categoria': categoria,
+            'desafio': desafio,
+        }
+
+    def get(self, request, *args, **kwargs):
+        messages.success(request, "Oponente desafiado com Sucesso!! Aguarde a resposta dele!")
+        return render(request, self.template_name, self.contexto)
+
+
+class TestarDesafio(View):
+    model = 'jogo'
+    template_name = 'desafio_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
+        user_request = Usuario.objects.get(user=request.user)
+        if url == 'defesa':
+            desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
+            desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+        elif url == 'ataque':
+            desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
+            desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        pk_desafio = self.kwargs.get('pk')
+        desafio = Jogos.objects.get(pk=pk_desafio)
+        categoria = desafio.categoria
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+
+        cursor.execute(f'SELECT sql_desafio FROM contatos_contato WHERE desafio_id = {pk_desafio}')
+        self.resultado1 = cursor.fetchall()
+        print('Resultado')
+        for resultado in self.resultado1:
+            for key in resultado:
+                resultado_sql = resultado[key] = int(resultado[key])
+        print(resultado_sql)
+
+        self.contexto = {
+            'desafio_id': desafio.id,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,

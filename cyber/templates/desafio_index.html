@@ -8,6 +8,7 @@
 
                         <div class="row">
                             <div class="col-12 ml-2 text-center">
+                                <input id="desafio_id" type="hidden" value="{{desafio_id}}">
                                 <h2 class="t-orange menu-title">Instruções do Desafio</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
                                 {% if url == 'defesa' %}
@@ -71,7 +72,8 @@ var tempo = new Number();
 
       // Quando o contador chegar a zero faz esta ação
     } else {
-      window.open('../controllers/logout.php', '_self');
+       let id = document.getElementById('desafio_id').value;
+      window.open('../%2Fjogo/testar/desafio/'+id, '_self');
     }
 
   }

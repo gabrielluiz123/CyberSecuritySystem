@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
+
 class Usuario(models.Model):
     pontos = models.IntegerField(default=0, verbose_name='Pontos')
     pontos_ataque = models.IntegerField(default=0, verbose_name='Pontos de Ataque')
@@ -28,6 +29,7 @@ class Jogos(models.Model):
     user_defense = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_defense', verbose_name="Usuário de Defesa")
     ganhador = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='user_ganhador', verbose_name="Ganhador", null=True, blank=True)
     pontos = models.IntegerField(default=0, verbose_name="Pontos Recebidos", null=True, blank=True)
+    registros_sql = models.IntegerField(default=0, verbose_name="Pontos Recebidos", null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name="Categoria", null=True, blank=True)
     aceite = models.BooleanField(default=False, verbose_name="Aceite")
     iniciado = models.BooleanField(default=False, verbose_name="Iniciado")
