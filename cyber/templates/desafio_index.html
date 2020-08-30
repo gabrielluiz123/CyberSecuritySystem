@@ -18,6 +18,15 @@
                                         <p>Quanto mais tempo defender, mais pontos ganhará!</p>
                                         <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
                                     {% endif %}
+                                 {% endif %}
+                                {% if url == 'ataque' %}
+                                    {% if categoria.nome == 'SQL Injection' %}
+                                        <p>O desafio irá durar 1 hora!</p>
+                                        <p>Você terá que atacar nossa aplicação com ataques de SQL Injection (INSERT, DELETE, UPDATE, SELECT) durante o desafio!</p>
+                                        <p>Quanto mais rápido atacar, mais pontos ganhará!</p>
+                                        <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
+                                    {% endif %}
+                                 {% endif %}
                                 Hora de Inicio:<br> {{desafio.inicio_jogo.hour}}:{{desafio.inicio_jogo.minute}}<br>
                                 Hora de Fim: <div id="date_fim">{{desafio.fim_jogo.hour}}:{{desafio.fim_jogo.minute}}</div><br>
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -73,7 +82,7 @@ var tempo = new Number();
       // Quando o contador chegar a zero faz esta ação
     } else {
        let id = document.getElementById('desafio_id').value;
-      window.open('../%2Fjogo/testar/desafio/'+id, '_self');
+      //window.open('../%2Fjogo/testar/desafio/'+id, '_self');
     }
 
   }
@@ -83,7 +92,7 @@ var tempo = new Number();
 </script>
 
                                     </div>
-                                {% endif %}
+
                             </div>
                         </div>
                     </div>

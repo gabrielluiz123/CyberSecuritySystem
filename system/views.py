@@ -5,6 +5,7 @@ from django.utils import timezone
 from .models import Jogos, Categoria, Url
 from .models import Usuario
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.core.validators import validate_email
 
 
@@ -23,19 +24,38 @@ class IndexJogar(View):
             if url == 'defesa':
                 desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
                 desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+                desafios_aceito_1 = len(
+                    Jogos.objects.filter(aceite=True, user_defense=user_request, desafiado=request.user,
+                                         Finalizado=False))
+                desafios_aceito_noti = Jogos.objects.filter(aceite=True, user_defense=user_request,
+                                                            desafiado=request.user, Finalizado=False)
             elif url == 'ataque':
                 desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
                 desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
-            nome = request.user.first_name.strip().split(' ')[0]
-        else:
-            nome = None
+                desafios_aceito_1 = len(
+                    Jogos.objects.filter(aceite=True, user_attack=user_request, desafiado=request.user,
+                                         Finalizado=False))
+                desafios_aceito_noti = Jogos.objects.filter(aceite=True, user_attack=user_request,
+                                                            desafiado=request.user, Finalizado=False)
+            if request.user.is_authenticated:
+                nome = request.user.first_name.strip().split(' ')[0]
+            else:
+                nome = None
+            desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                        Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                        Q(Finalizado=False))
+            desafios_aceito_1 = len(desafios_aceito_noti)
+            print("ATAQUE")
+            print(desafios_aceito_1)
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
             'categorias': categorias,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -62,7 +82,13 @@ class IndexBrute(View):
                 desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
@@ -94,7 +120,13 @@ class IndexDdos(View):
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
@@ -126,7 +158,13 @@ class IndexSql(View):
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
@@ -158,15 +196,29 @@ class Index(View):
             elif url == 'ataque':
                 desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
                 desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
-            nome = request.user.first_name.strip().split(' ')[0]
-        else:
-            nome = None
+            desafios_aceito_1 = len(
+                Jogos.objects.filter(Q(aceite=True), Q(user_defense=user_request) | Q(user_attack=user_request),
+                                     Q(Finalizado=False)))
+            if request.user.is_authenticated:
+                nome = request.user.first_name.strip().split(' ')[0]
+            else:
+                nome = None
+            print("ATAQUE")
+            print(desafios_aceito_1)
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -187,7 +239,13 @@ class Index(View):
         else:
             nome = None
 
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,

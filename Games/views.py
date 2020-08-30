@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib import messages, auth
 from django.utils import timezone
 from system.models import Usuario, Categoria, Jogos, Url
+from django.db.models import Q
 from django.contrib.auth.models import User
 from datetime import *
 import pymysql.cursors
@@ -30,19 +31,31 @@ class Index(View):
         if url == 'defesa':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+            desafios_aceito_1 = len(Jogos.objects.filter(aceite=True, user_defense=user_request, desafiado=request.user, Finalizado=False))
+            desafios_aceito_noti = Jogos.objects.filter(aceite=True, user_defense=user_request, desafiado=request.user, Finalizado=False)
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+            desafios_aceito_1 = len(Jogos.objects.filter(aceite=True, user_attack=user_request, desafiado=request.user, Finalizado=False))
+            desafios_aceito_noti = Jogos.objects.filter(aceite=True, user_attack=user_request, desafiado=request.user, Finalizado=False)
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
+        print("ATAQUE")
+        print(desafios_aceito_1)
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -64,6 +77,10 @@ class IndexBrute(View):
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
@@ -73,7 +90,9 @@ class IndexBrute(View):
             'nome': nome,
             'url': url,
             'number': desafios_1,
-            'desafios': desafios_noti,
+            'number_aceito': desafios_aceito_1,
+            'desafios': desafios_aceito_noti,
+            'desafios_aceito': desafios_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -94,6 +113,10 @@ class IndexSQL(View):
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
@@ -105,7 +128,9 @@ class IndexSQL(View):
             'usuarios': usuarios,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -126,6 +151,10 @@ class IndexDdos(View):
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
@@ -135,7 +164,9 @@ class IndexDdos(View):
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -157,6 +188,7 @@ class Desafiar(View):
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+
         pk = self.kwargs.get('pk')
         cat = self.kwargs.get('cat')
         if url == 'defesa':
@@ -176,12 +208,18 @@ class Desafiar(View):
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
         }
 
     def get(self, request, *args, **kwargs):
@@ -206,34 +244,80 @@ class AceitarDesafio(View):
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
         pk_desafio = self.kwargs.get('pk')
         desafio = Jogos.objects.get(pk=pk_desafio)
-        if desafio.aceite:
+        if not desafio.aceite:
             desafio.aceite = True
             desafio.iniciado = True
             desafio.inicio_jogo = datetime.now()
             desafio.fim_jogo = datetime.now() + timedelta(hours=1)
             desafio.save()
-            print("AQUIIIIIIIIIIIIIIIIIIIIIIII")
             cursor.execute(f'INSERT INTO contatos_contato (desafio_id, nome, sobrenome, telefone) values ({pk_desafio}, "DEsafio", "Ataque", "1222")')
             conexao.commit()
-            print(cursor.rowcount, "Record inserted successfully into Laptop table")
         categoria = desafio.categoria
         if request.user.is_authenticated:
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
             'desafio_id': desafio.id,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
             'categoria': categoria,
             'desafio': desafio,
         }
 
     def get(self, request, *args, **kwargs):
         messages.success(request, "Oponente desafiado com Sucesso!! Aguarde a resposta dele!")
+        return render(request, self.template_name, self.contexto)
+
+
+class IrParaDesafio(View):
+    model = 'jogo'
+    template_name = 'desafio_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
+        user_request = Usuario.objects.get(user=request.user)
+        if url == 'defesa':
+            desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
+            desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+        elif url == 'ataque':
+            desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
+            desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        pk_desafio = self.kwargs.get('pk')
+        desafio = Jogos.objects.get(pk=pk_desafio)
+        categoria = desafio.categoria
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+        else:
+            nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
+        self.contexto = {
+            'desafio_id': desafio.id,
+            'users': request.user.is_authenticated,
+            'nome': nome,
+            'url': url,
+            'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
+            'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
+            'categoria': categoria,
+            'desafio': desafio,
+        }
+
+    def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.contexto)
 
 
@@ -265,15 +349,19 @@ class TestarDesafio(View):
         for resultado in self.resultado1:
             for key in resultado:
                 resultado_sql = resultado[key] = int(resultado[key])
-        print(resultado_sql)
-
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
             'desafio_id': desafio.id,
             'users': request.user.is_authenticated,
             'nome': nome,
             'url': url,
             'number': desafios_1,
+            'number_aceito': desafios_aceito_1,
             'desafios': desafios_noti,
+            'desafios_aceito': desafios_aceito_noti,
             'categoria': categoria,
             'desafio': desafio,
         }
