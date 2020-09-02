@@ -1,0 +1,119 @@
+/* Borders */
+
+.b-{
+    &black{
+        border-color: black;
+    }
+    &gray{
+        border-color: $gray;
+    }
+    &org{
+        border-color: $orange;
+    }
+}
+
+/* Backgrounds */
+.bg-white{
+    color: $brand-dark !important;
+    background: $white !important;
+}
+.bg-purple{
+    background: $purple;
+}
+.bg-grey{
+    background: $grey
+}
+.bg-gradient{
+    background: linear-gradient(to right, #ffab00, #ffe283);
+}
+.bg-transparent{
+    background: transparent !important;
+}
+.bg-stripped-brand-dark{
+    color: $brand-white;
+    &:nth-of-type(2n){
+        background-color: lighten($brand-dark, 5%);
+    }
+    &:nth-of-type(2n+1){
+        background-color: $brand-dark;
+    }
+}
+.bg-stripped-brand-light{
+    color: $brand-dark;
+    &:nth-of-type(2n){
+        background-color: $brand-lighter;
+    }
+    &:nth-of-type(2n+1){
+        background-color: $brand-white;
+    }
+}
+.bg{
+    &-brand{
+        background-color: $brand-main;
+        &-dark{
+            background-color: $brand-dark;
+        }
+        &-light{
+            background-color: $brand-light;
+        }
+        &-lighter{
+            background-color: $brand-lighter;
+        }
+        &-white{
+            background-color: $brand-white;
+            &-a{
+                &-0{
+                    background-color: $brand-white-alpha-0
+                }
+                &-1{
+                    background-color: $brand-white-alpha-1;
+                }
+            }
+        }
+    }
+    &-black{
+        background-color: $black !important;
+    }
+    &-black-a{
+        background-color: $black-alpha-2 !important;
+        &-0{
+            background-color: $black-alpha !important;
+        }
+    }
+    &-navbar-fixed{
+        background-color: $menu-background-fixed;
+    }
+    &-navbar{
+        background-color: $menu-background;
+    }
+    &-orange{
+        background-color: $orange;
+    }
+    &-toTopBtn{
+        background-color: $bg-toTopBtn;
+        color: $font-toTopBtn;
+    }
+}
+
+/* Texts */
+
+.text-grey{
+    color: rgb(168, 168, 168);
+}
+.text-purple{
+    color: #6D2080
+}
+/*buttons*/
+.btn-purple{
+    background-color: #6D2080;
+    color: white;
+}
+.btn-purple-o{
+    background-color: white;
+    color: #6D2080;
+    border-color: #6D2080;
+}
+.btn-white{
+    background-color: white;
+    color: #6D2080;
+}

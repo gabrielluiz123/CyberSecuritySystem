@@ -1,0 +1,35 @@
+.reveal {
+    >div {
+        >.row {
+            transition: #{$default-transition} #{$default-transition-time};
+            opacity: 0;
+        }
+    }
+}
+// Fading show
+.l-fade{
+    >div {
+        >.row{
+            opacity: 0;
+        }
+    }
+}
+.l-faded{
+    opacity: 1 !important;
+}
+
+//fade+scroll show
+.l-fade-scroll{
+    >div {
+        >.row{
+            position: relative;
+            opacity: 0;
+            top: 50px;
+        }
+    }
+}
+.l-scrolled{
+    opacity: 1 !important;
+    top: 0 !important;
+}
+

@@ -1,7 +1,10 @@
 {% load static %}
-{% with '/assets/img/header_bluebird.jpg' as image_static %}
-<section class="container d-flex justify-content-center bg-parallax" id="main-header" style="background-image: url({%static image_static %});  width: 100%;height: 96vh;background-width: cover;">
-{% endwith %}
+{% if url == 'ataque' %}
+<section class="container d-flex justify-content-center bg-parallax" id="main-header" style="background-image: url({%static '/assets/img/attack_header.jpg' %});  width: 100%;height: 96vh;background-width: cover;">
+{% else %}
+<section class="container d-flex justify-content-center bg-parallax" id="main-header" style="background-image: url({%static '/assets/img/header_bluebird.jpg' %});  width: 100%;height: 96vh;background-width: cover;">
+{% endif %}
+
                <div class="row align-self-center" id="header">
                         <div class="col-12 text-center">
 

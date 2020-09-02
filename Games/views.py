@@ -248,7 +248,7 @@ class AceitarDesafio(View):
             desafio.aceite = True
             desafio.iniciado = True
             desafio.inicio_jogo = datetime.now()
-            desafio.fim_jogo = datetime.now() + timedelta(hours=1)
+            desafio.fim_jogo = datetime.now() + timedelta(minutes=1)
             desafio.save()
             cursor.execute(f'INSERT INTO contatos_contato (desafio_id, nome, sobrenome, telefone) values ({pk_desafio}, "DEsafio", "Ataque", "1222")')
             conexao.commit()
@@ -323,7 +323,7 @@ class IrParaDesafio(View):
 
 class TestarDesafio(View):
     model = 'jogo'
-    template_name = 'desafio_index.html'
+    template_name = 'sidebar_left.html'
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
@@ -348,7 +348,14 @@ class TestarDesafio(View):
         print('Resultado')
         for resultado in self.resultado1:
             for key in resultado:
-                resultado_sql = resultado[key] = int(resultado[key])
+                self.resultado_sql = resultado[key] = int(resultado[key])
+
+        cursor.execute(f'SELECT login FROM contatos_contato WHERE desafio_id = {pk_desafio}')
+        self.resultado1 = cursor.fetchall()
+        print('Resultado')
+        for resultado in self.resultado1:
+            for key in resultado:
+                self.resultado_login = resultado[key] = int(resultado[key])
         desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
                                                     Q(user_defense=user_request) | Q(user_attack=user_request),
                                                     Q(Finalizado=False))
@@ -367,5 +374,8 @@ class TestarDesafio(View):
         }
 
     def get(self, request, *args, **kwargs):
-        messages.success(request, "Oponente desafiado com Sucesso!! Aguarde a resposta dele!")
+        if self.resultado_sql == 0:
+            messages.success(request, 'Defesa Ganhou!!')
+        else:
+            messages.success(request, 'Ataque Ganhou!!')
         return render(request, self.template_name, self.contexto)

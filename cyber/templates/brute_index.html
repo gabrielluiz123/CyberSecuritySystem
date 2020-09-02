@@ -63,19 +63,23 @@ body {font-family: "Lato", sans-serif;}
 </style>
 </head>
 
-<div class="tab">
+<div style="height:350px !important;" class="tab">
   <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">O Ataque</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">Consequências</button>
+    {% if url == 'ataque' %}
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Ataques</button>
+    <button class="tablinks" onclick="openCity(event, 'tutorial')">Tutorial</button>
+    {% else %}
   <button class="tablinks" onclick="openCity(event, 'Tokyo')">Prevenção</button>
+  <button class="tablinks" onclick="openCity(event, 'tutorial')">Tutorial</button>
+    {% endif %}
   <button class="tablinks" onclick="openCity(event, 'Links')">Links Úteis</button>
 </div>
 
 <div style="overflow:auto" id="London" class="tabcontent">
   <br><h3>Brute Force</h3><br>
-  <p>Brute Force ou Ataque de Fordça Bruta é um ataque que faz exaustivos testes até encontrar a senha ou chave que está procurando.</p>
-  <p>Utilizado principalmente para a quebra de senhas e criptografias, porém quanto maior a complexidade do objeto a ser quebrado, maior o gasto de processamento e de tempo do ataque.</p>
-  <p>Pode ser feita de maneira manual, digitando a senha e o login diversas vezes manualmente, ou de maneira automática, por meio de um algoritmo que efetue várias tentativas em um curto periodo de tempo.</p>
-  <p>Na utilização de algoritmos, são utilizados 'words lists' para auxiliar o programa a quebrar a senha mais rapidamente.</p>
+  <p> As senhas são a forma de autenticação mais utilizada em todo o mundo. Um nome de usuário e senha são usados ​​em sistemas de computador, contas bancárias, caixas eletrônicos e muito mais. A capacidade de quebrar senhas é uma habilidade essencial tanto para o hacker quanto para um investigador forense, o último precisando hackear senhas para acessar o sistema do suspeito, disco rígido, conta de e-mail, etc. </p>
+  <p>Embora algumas senhas sejam muito fáceis de quebrar, algumas são muito difíceis. Nesses casos, o hacker ou investigador forense pode empregar maiores recursos de computação (um a botnet, supercomputador, GPU, ASIC, etc.), ou eles podem tentar obter a senha de outras maneiras. </p>
 </div>
 
 <div style="overflow:auto" id="Paris" class="tabcontent">
@@ -87,11 +91,55 @@ body {font-family: "Lato", sans-serif;}
 </div>
 
 <div style="overflow:auto" id="Tokyo" class="tabcontent">
+    {% if url == 'ataque' %}
+    <br><h3>Tipos de ataques</h3><br>
+  <p>Dicionário:
+Um ataque de dicionário é o ataque de cracking de senha mais simples e rápido. Simplesmente, ele passa por um dicionário de palavras tentando cada um deles para ver se elas funcionam. Embora tal abordagem pareça impraticável para fazer manualmente, os computadores podem fazer isso muito rápido e executar milhões de palavras em algumas horas. Isso geralmente deve ser sua primeira abordagem para atacar qualquer senha e, em alguns casos, pode ser bem sucedida em poucos minutos. </p>
+    <li>Rainbow Table:
+A maioria dos sistemas modernos agora armazena senhas em um hash. Isso significa que, mesmo que você possa acessar a área ou arquivo que armazena a senha, o que você vai conseguir será somente uma senha criptografada. Uma caminho para quebrar essa criptografia é transformar cada palavra do arquivo de dicionário em hash e compará-la com a senha hash. Isso gasta muito tempo mesmo fazendo uso intensivo de uma CPU. Uma abordagem mais rápida é pegar uma tabela com todas as palavras no dicionário já criptografadas e comparar o hash do arquivo de senha com sua lista de hashes. Se houver uma igual, você  saberá a senha. </li>
+    <li>Brute Force:
+A força bruta é a abordagem mais demorada para o cracking por senha. Deve sempre ser seu último recurso. O cracking de senha por brute force tenta todas as possibilidades de todas as letras, números, caracteres especiais que podem ser combinados para fazer uma senha e os testam. Como você pode  esperar, quanto mais potência de computação você tiver, mais sucesso terá com essa abordagem. </li>
+    {% else %}
   <br><h3>Como Previnir</h3><br>
   <p>Existem várias maneiras de prevenção contra BruteForce que o usuário pode adotar para se proteger, como:</p>
     <li>Não utilizar a mesma senha em diversos sistemas</li>
     <li>Não colocar palavras relacionadas a você nas senhas</li>
     <li>Utilizar senhas complexas compostas por letras, números e caracteres especiais</li>
+    {% endif %}
+</div>
+
+<div style="overflow:auto" id="tutorial" class="tabcontent">
+    {% if url == 'ataque' %}
+    <br><h3>Passo a passo</h3><br>
+    <li>Passo 1: Brute Force de Senhas Curtas
+Isso pode parecer estranho e fora do senso comum, mas,  muitas vezes vale a pena começar tentando descobrir senhas muito curtas através de um brute force. Apesar do brute force de senhas longas poder demorar muito tempo (dias ou semanas), senhas muito curtas podem ser quebradas em questão de minutos.
+Recomendo começar por tentar a quebra por força bruta com senhas de seis caracteres ou menos. Dependendo do seu hardware, isso geralmente poderá ser realizado em questão de minutos ou poucas horas. Muitas das vezes isso produzirá pelo menos algumas senhas.
+Além disso, também tente forçar todas as senhas numéricas nesta fase. As senhas numéricas são as mais fáceis de quebrar. Uma senha numérica de 8 caracteres requer apenas 100 milhões de tentativas, e até uma senha numérica de 12 caracteres permite apenas 1 trilhão de possibilidades. Com um hardware poderoso podemos fazer isso tranquilamente. </li>
+    <li>Passo 2: Low-Hanging Fruit
+Uma vez que tenhamos quebrado algumas senhas pequenas por Brute Force, ainda podemos  ter um arquivo que contém muito mais hashes nele. Se tentarmos comprometer uma rede institucional ou corporativa, geralmente só precisamos quebrar uma única senha para iniciar o comprometimento da rede.
+Embora o usuário cuja senha foi quebrada possa ter direitos e privilégios limitados, existem várias maneiras de escalar privilégios para sysadmin ou root. Isso significa que, se pudermos quebrar uma única senha em uma rede, provavelmente podemos comprometer toda a rede.
+Tudo dito, vamos seguir com Low-Hanging Fruit. Isso significa que não vamos avançar alem das senhas mais fáceis de quebrar. Por exemplo, se a instituição tiver uma política de senhas em que todas as senhas devem ter no minimo 8 caracteres, muitas pessoas faram suas senhas com o  mínimo absoluto.
+Para tentar uma brecha rápida  desses hashes, simplesmente escolha um lista de palavras chave que são de oito caracteres. Executar os milhões de palavras dessa tal lista, geralmente, leva apenas algumas horas e é provável que encontre uma parcela significativa das senhas. </li>
+    <li>Passo 3: Experimente senhas Comuns
+Nós seres humanos, por mais que julguemos ser únicos,  tendemos a pensar e agir de forma semelhante. Assim como os animais de bando, seguimos o rebanho e agimos de forma semelhante. O mesmo pode ser dito para quando definimos nossas senhas.
+Os usuários querem uma senha capaz de atender a uma politica minima estipulada em suas organizações, mas que também seja fácil de lembrar. Por isso que vemos senhas como “P@ssw0rD” com tanta frequência. Apesar de sua simplicidade óbvia, ele cumpre uma política de senha de no mínimo 8 caracteres, letras maiúsculas e minúsculas, um caractere especial e um número. Acredite ou não, esta senha e suas variações são usadas várias vezes.
+Sabendo que as pessoas tendem a usar esses tipos de senhas, na nossa próxima iteração na lista de hash de senha, vamos tentar uma lista de senhas comumente encontradas. Numerosos sites na web incluem listas de palavras de senhas quebradas ou capturadas. Além disso, você pode tentar raspar a web para capturar tantas senhas quanto possível. </li>
+    <li>
+        Passo 4: Combine Palavras com números
+Através da Low-Hanging Fruit na Etapa 2 e das senhas comuns na Etapa 3 provavelmente renderão pelo menos algumas senhas e o tempo consumido para isso é mínimo. Agora queremos atacar os hashes restantes e dar o próximo passo na complexidade.
+Nesta iteração, vamos executar os hashes restantes através de uma lista de palavras que possui palavras de dicionário mais longas e palavras de dicionário com números. Os usuários, muitas vezes apenas adicionarão números ao começo ou ao final de suas senhas,porque eles são obrigados a mudar as senhas periodicamente. Algumas de nossas ferramentas de cracking de senha, como hashcat e John the Ripper, nos permite usar regras para auto inscrever na lista de palavras para combinar palavras, acrescentar e substituir números, mudar case, etc.
+    </li>
+    <li>Passo 5: Ataque Híbrido
+Até agora, geralmente agravamos mais de 50% das senhas nos Passos 1 ao 4, mas temos um trabalho mais difícil á frente para quebrar as senhas mais intransigentes. Essas senhas geralmente incluem caracteres especiais e palavras combinadas.
+Estes incluem palavras-passe como “socc3rmom” e “n3xtb1gth1ng”. Estas são senhas relativamente fortes, incluindo caracteres e números especiais, mas porque incluem variações em palavras de dicionário, elas são facilmente quebráveis.
+Em seguida, precisamos de uma lista de senhas que combina palavras de dicionário com números e caracteres especiais. Felizmente, isso é algo que o John the Ripper faz automaticamente, mas outros crackers de senhas (Cain e Abel) não necessariamente. O Hashcat pode ser executado com um dos seus vários conjuntos de regras para combinar palavras e caracteres especiais com sua lista de palavras. </li>
+    {% else %}
+  <br><h3>Como Previnir</h3><br>
+  <p>Existem várias maneiras de prevenção contra BruteForce que o usuário pode adotar para se proteger, como:</p>
+    <li>Não utilizar a mesma senha em diversos sistemas</li>
+    <li>Não colocar palavras relacionadas a você nas senhas</li>
+    <li>Utilizar senhas complexas compostas por letras, números e caracteres especiais</li>
+    {% endif %}
 </div>
 
 <div style="overflow:auto" id="Links" class="tabcontent">

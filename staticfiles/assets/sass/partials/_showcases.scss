@@ -1,0 +1,187 @@
+.showcase {
+
+    &-album {
+
+        img {
+            background-color: white !important;
+            max-height: 30vh;
+            width: 100%;
+            cursor: pointer;
+            transition: #{$default-transition-time} #{$default-transition};
+
+            @include media-breakpoint-up(sm) {
+
+                &.no-hover {
+                    &:hover {
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    }
+                }
+
+                &:hover {
+                    position: relative;
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+
+                    &~p {
+
+                        .star-spin {
+                            position: relative;
+                            -webkit-animation: starSpin 5s infinite;
+                            /* Safari 4+ */
+                            -moz-animation: starSpin 5s infinite;
+                            /* Fx 5+ */
+                            -o-animation: starSpin 5s infinite;
+                            /* Opera 12+ */
+                            animation: starSpin 5s infinite;
+
+                            /* IE 10+, Fx 29+ */
+                            @for $i from 1 to 6 {
+                                &:nth-of-type(#{$i}) {
+                                    animation-delay: #{$i*100}ms;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        p {
+            padding: 35px;
+            border-radius: 0 0 50% 50%;
+            min-height: 200px;
+        }
+    }
+}
+
+
+.adm-thumbnail {
+    label {
+        position: relative;
+
+        i,
+        img,
+        .text,
+        .action-icon {
+            transition: #{$default-transition-time} #{$default-transition};
+        }
+
+        .action-icon {
+            position: absolute;
+            opacity: 0;
+            display: block;
+            z-index: 2;
+
+            .text{
+                opacity: 0;
+            }
+            i {
+                &.fa {
+                    &-trash {
+                        &:hover {
+                            color: $brand-main;
+                        }
+                    }
+
+                    &-camera {
+                        &:hover {
+                            color: $success;
+                        }
+                    }
+
+                }
+                &:hover ~.text{
+                    opacity: 1;
+                }
+            }
+
+        }
+
+        &:hover {
+            img {
+                opacity: 0.3;
+            }
+
+            .action-icon {
+                opacity: 1;
+            }
+        }
+
+    }
+}
+
+#photoLightbox {
+    #the_photos_carousel{
+        height: 90vh;
+    }
+    .modal-dialog {
+        max-width: 100%;
+        margin-top: 0;
+        margin-left: 30px;
+        height: 80%;
+
+        .modal-content {
+            background-color: transparent;
+            border: none;
+            height: 100%;
+            .modal-body {
+                height: 100%;
+                .close {
+                    position: absolute;
+                    right: 0;
+                    z-index: 1051;
+                }
+
+                .carousel {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .carousel-inner {
+                        width: auto;
+
+                        .carousel-item {
+                            width: auto;
+
+                            img {
+                                max-height: 88vh;
+                                border-radius: 3px;
+                            }
+
+                            &.active {
+                                justify-content: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.showcase{
+    &.client-scrap{
+        img{
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+        }
+    }
+}
+
+
+//Vue Carousel
+
+.VueCarousel{
+	height: 350px !important;
+	&-wrapper{
+		.VueCarousel-inner{
+            height: 290px !important;
+            img.lazy{
+                max-height: 100% !important;
+                width: 95%;
+            }
+		}
+	}
+}

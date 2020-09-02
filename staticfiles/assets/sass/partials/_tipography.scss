@@ -1,0 +1,119 @@
+.t{
+    &-black{
+        color: black !important;
+    }
+    &-white{
+        color: white !important;
+    }
+    &-orange{
+        color: $orange !important;
+    }
+    &-gray{
+        color: $gray !important;
+    }
+    &-green{
+        color: $success !important;
+    }
+    /* Change this for a custom section text color or swap the div class */
+    &-section{
+        color: inherit;
+    }
+    &-highlight{
+        color: $brand-dark;
+        font-weight: bolder;
+    }
+    &-brand{
+        color: $brand-main !important;
+        &-dark{
+            color: $brand-dark;
+        }
+        &-light{
+            color: $brand-light;
+        }
+        &-lighter{
+            color: $brand-lighter;
+        }
+        &-white{
+            color: $brand-white;
+        }
+    }
+}
+.f{
+    &-concert-one{
+        font-family: $f-title;
+    }
+}
+
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5,
+h6,.h6{
+    font-family: $f-title
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800');
+h1,
+.h1{
+    font-weight: 600;
+    font-size: 6em;
+}
+.text-strong{
+    font-weight: 600 !important;
+}
+.text-lighter{
+    font-weight: lighter;
+}
+.text-title{
+    font-size: 36px;
+}
+.text-indent{
+    text-indent: 2em;
+}
+.font-12px{
+    font-size: 12px !important;
+}
+.font-16px{
+    font-size: 16px !important;
+}
+.font-14px{
+    font-size: 14px !important;
+}
+.font-18px{
+    font-size: 18px !important;
+}
+.font-24px{
+    font-size: 24px !important;
+}
+.font-36px{
+    font-size: 36px !important;
+}
+p{
+    font-size: 16px;
+    font-family: $f-title;
+}
+a{
+    color: currentColor;
+}
+.no-decoration,
+.no-decoration:hover,
+.no-decoration:focus{
+    text-decoration: none !important;
+}
+a:hover{
+    text-decoration: none;
+}
+@media screen and (max-width: 991.97px){}
+@media screen and (max-width: 767.97px){}
+@include media-breakpoint-down(sm){
+    h1,.h1{
+        font-size: 36px !important;
+    }
+    h3,.h3{
+        font-size: 18px !important;
+    }
+    p{
+        font-size: 14px;
+    }
+}

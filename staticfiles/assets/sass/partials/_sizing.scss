@@ -1,0 +1,66 @@
+.vh-min{
+    &-10{
+        min-height: 10vh;  
+    }
+    &-20{
+        min-height: 20vh;  
+    }
+    &-30{
+        min-height: 30vh;  
+    }
+    &-40{
+        min-height: 40vh;  
+    }
+    &-50{
+        min-height: 50vh;  
+    }
+    &-100{
+        min-height: 100vh;  
+    }
+}
+.vw{
+    &-10{
+        min-width: 10vw;  
+    }
+    &-20{
+        min-width: 20vw;  
+    }
+    &-30{
+        min-width: 30vw;  
+    }
+    &-40{
+        min-width: 40vw;  
+    }
+    &-50{
+        min-width: 50vw;  
+    }
+    &-100{
+        min-width: 100vw;  
+    }
+}
+.v{
+    &-10{
+        min-width: 10vw;  
+        min-height: 10vh;  
+    }
+    &-20{
+        min-width: 20vw;  
+        min-height: 20vh
+    }
+    &-30{
+        min-width: 30vw;  
+        min-height: 30vh;
+    }
+    &-40{
+        min-width: 40vw;  
+        min-height: 40vh;
+    }
+    &-50{
+        min-width: 50vw;  
+        min-height: 50vh;
+    }
+    &-100{
+        min-width: 100vw;  
+        min-height: 100vh;
+    }
+}

@@ -1,0 +1,54 @@
+@import 'partials/imports.scss';
+.pointer{
+    cursor: pointer;
+}
+
+body{
+    // overflow: hidden;
+    section{
+        max-width: 100%;
+        position: relative;
+        .section-mask{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-color: $brand-white-alpha-3;
+        }
+
+        &#second-board{
+            .container{
+                position: relative;
+                z-index: 1;
+            }
+            // background-image: url('../img/lawyer-slider-3.jpg');
+            // background-size: cover;
+            // background-repeat: no-repeat;
+        }
+    }
+    
+    background-color: white;
+    
+    .divisor{
+        height: 3px;
+        width: 5%;
+        position: relative;
+        left: 50%;
+        margin-left: -2.5%;
+    }
+    footer{
+        position: relative;
+        z-index: 2;
+    }
+}
+.bg-fixed{
+    background-attachment: fixed;
+}
+
+#registro_oportunidade{
+    background-size: cover;
+    background-image: url('/assets/img/glenn-carstens-peters-npxXWgQ33ZQ-unsplash.png');
+
+}

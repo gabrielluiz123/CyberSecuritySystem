@@ -186,6 +186,9 @@ class Index(View):
         url = Url.objects.get(url=request.META['HTTP_HOST']).nome
         desafios_noti = None
         desafios_1 = None
+        desafios_aceito_noti = None
+        desafios_aceito_1 = None
+        nome = None
         if request.user.is_authenticated:
             user_request = Usuario.objects.get(user=request.user)
             print("ALII")
@@ -201,14 +204,16 @@ class Index(View):
                                      Q(Finalizado=False)))
             if request.user.is_authenticated:
                 nome = request.user.first_name.strip().split(' ')[0]
+                desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                            Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                            Q(Finalizado=False))
+                desafios_aceito_1 = len(desafios_aceito_noti)
             else:
                 nome = None
+                desafios_aceito_noti = None
+                desafios_aceito_1 =  None
             print("ATAQUE")
             print(desafios_aceito_1)
-        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
-                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
-                                                    Q(Finalizado=False))
-        desafios_aceito_1 = len(desafios_aceito_noti)
         self.contexto = {
             'number_aceito': desafios_aceito_1,
             'desafios_aceitos': desafios_aceito_noti,

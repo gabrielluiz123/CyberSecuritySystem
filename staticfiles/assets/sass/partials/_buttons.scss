@@ -1,0 +1,44 @@
+.btn{
+    font-family: Montserrat;
+    font-weight: Bold;
+    font-size: 16px;
+    padding: 10px 12px;
+    margin: 5px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    &:focus{
+        box-shadow: none !important;
+    }
+}
+.btn-1{
+    min-width: 170px;
+    height: 50px;
+}
+.btn-2{
+    min-width: 270px;
+    height: 50px;
+}
+.btn-b3{
+    height: 30px;
+    padding: 0;
+    background-color: transparent;
+}
+.btn-toTop{
+    transition: #{$default-transition} #{$default-transition-time};
+    opacity: 0;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+}
+.top-right-btn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: ease-in-out 300ms;
+    opacity: 0.3;
+    &:hover{
+        transform: rotate(90deg);
+        opacity: 1;
+    }
+}

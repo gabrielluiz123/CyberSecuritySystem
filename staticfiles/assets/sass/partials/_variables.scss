@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Spirax|Cardo');
+
+/* Fonts */
+$f-title:       'Montserrat', cursive;
+$f-default:     'Spirax', cursive;
+
+/* Alphas */
+$alpha:   0.1;
+$alpha-0: 0.2;
+$alpha-1: 0.3;
+$alpha-2: 0.5;
+$alpha-3: 0.7;
+
+/* Colors */
+$orange:        #ffa500 !default;
+$gray:          #a8a8a8 !default;
+$grey:          #a8a8a8 !default;
+$success:       #008000 !default;
+$black:         #111111 !default;
+$white:         #fff    !default;
+$purple:        #6D2080 !default;
+
+/* Transparent colors */
+$black-alpha    : rgba($black, $alpha)      !default;
+$black-alpha-0  : rgba($black, $alpha-0)    !default;
+$black-alpha-1  : rgba($black, $alpha-1)    !default;
+$black-alpha-2  : rgba($black, $alpha-2)    !default;
+$black-alpha-3  : rgba($black, $alpha-3)    !default;
+
+$gray-alpha-0   : rgba($gray,  $alpha-0)    !default;
+$gray-alpha-1   : rgba($gray,  $alpha-1)    !default;
+$gray-alpha-2   : rgba($gray,  $alpha-2)    !default;
+
+$white-alpha-0   : rgba($white,  $alpha-0)    !default;
+$white-alpha-1   : rgba($white,  $alpha-1)    !default;
+$white-alpha-2   : rgba($white,  $alpha-2)    !default;
+$white-alpha-3   : rgba($white,  $alpha-3)    !default;
+
+$success-alpha-0: rgba($success, $alpha-0)  !default;
+$success-alpha-1: rgba($success, $alpha-1)  !default;
+$success-alpha-2: rgba($success, $alpha-2)  !default;
+$success-alpha-3: rgba($success, $alpha-3)  !default;
+
+/* Brand colors */
+$brand-orange:  $orange  !default;
+$brand-green:   $success !default;
+
+/* Main palette*/
+$brand-red:     #e63946 !default;
+$brand-dark:    #7e7d81 !default;
+$brand-light:   #1a424c !default;
+$brand-lighter: #b9f2fc !default;
+$brand-white:   #f1faee !default;
+$brand-main:   $brand-dark !default;
+
+/* Transparent Brand Colors */
+$header-mask-a  : rgba($brand-light, $alpha-1);
+
+$brand-main-alpha-0: rgba($brand-main, $alpha-0) !default;
+$brand-main-alpha-1: rgba($brand-main, $alpha-1) !default;
+$brand-main-alpha-2: rgba($brand-main, $alpha-2) !default;
+$brand-main-alpha-3: rgba($brand-main, $alpha-3) !default;
+
+$brand-dark-alpha-0: rgba($brand-dark, $alpha-0) !default;
+$brand-dark-alpha-1: rgba($brand-dark, $alpha-1) !default;
+$brand-dark-alpha-2: rgba($brand-dark, $alpha-2) !default;
+$brand-dark-alpha-3: rgba($brand-dark, $alpha-3) !default;
+
+$brand-light-alpha-0: rgba($brand-light, $alpha-0) !default;
+$brand-light-alpha-1: rgba($brand-light, $alpha-1) !default;
+$brand-light-alpha-2: rgba($brand-light, $alpha-2) !default;
+$brand-light-alpha-3: rgba($brand-light, $alpha-3) !default;
+
+$brand-lighter-alpha-0: rgba($brand-lighter, $alpha-0) !default;
+$brand-lighter-alpha-1: rgba($brand-lighter, $alpha-1) !default;
+$brand-lighter-alpha-2: rgba($brand-lighter, $alpha-2) !default;
+$brand-lighter-alpha-3: rgba($brand-lighter, $alpha-3) !default;
+
+$brand-white-alpha-0: rgba($brand-white, $alpha-0) !default;
+$brand-white-alpha-1: rgba($brand-white, $alpha-1) !default;
+$brand-white-alpha-2: rgba($brand-white, $alpha-2) !default;
+$brand-white-alpha-3: rgba($brand-white, $alpha-3) !default;
+
+$brand-red-alpha-0 : rgba($brand-red, $alpha-0) !default;
+$brand-red-alpha-1 : rgba($brand-red, $alpha-1) !default;
+$brand-red-alpha-2 : rgba($brand-red, $alpha-2) !default;
+$brand-red-alpha-3 : rgba($brand-red, $alpha-3) !default;
+
+
+/* Form colors */
+$form-fColor:       $brand-light !default;
+$form-focus-fColor: $brand-lighter  !default;
+
+/* Menu colors for hovers and children */
+$menu-hover:                $brand-main  !default;
+$menu-background-fixed:     $brand-light;
+$menu-background:           transparent;
+$menu-children-background:  $menu-background-fixed;
+$menu-children-hover:       $menu-hover;
+
+/* To Top button color */
+$bg-toTopBtn:   $brand-main  !default;
+$font-toTopBtn: $brand-white !default;
+
+/* Borders */
+$medium_border_width: 2px;
+$thin_border_width  : 1px;
+$strong_border_width: 3px;
+
+/* Border Radius */
+$border-radius: 10px;
+$border-radius-xs: $border-radius*0.5;
+$border-radius-sm: $border-radius*0.8;
+$border-radius-md: $border-radius*1.2;
+$border-radius-lg: $border-radius*1.5;
+$border-radius-hg: $border-radius*2.0;
+
+$default_border_width: $thin_border_width;
+
+/* Gloss */
+$base-transition-time   : 200;
+$default-transition-time:  $base-transition-time+'ms';
+$fast-transition-time   :  $base-transition-time*0.5+'ms';
+$slow-transition-time   :  $base-transition-time*3+'ms';
+$default-transition     : 'ease-in-out';
+$transition-bezier-in   : 'cubic-bezier(.54,.3,.39,1.58)';
+$transition-bezier-out  : 'cubic-bezier(.59,-0.53,.57,.78)';
