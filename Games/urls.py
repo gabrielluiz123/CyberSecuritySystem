@@ -9,6 +9,7 @@ urlpatterns = [
     path('/Brute', views.IndexBrute.as_view(), name='jogar_brute'),
     path('/Desafio_sql/<int:pk>,<int:cat>', views.Desafiar.as_view(), name='desafiar'),
     path('/Aceitar_Desafio/<int:pk>', views.AceitarDesafio.as_view(), name='aceitar_desafio'),
+    path('/Inserir_Code/<int:pk>', views.InserirCode.as_view(), name='inser_line'),
     path('/Desafio/<int:pk>', views.IrParaDesafio.as_view(), name='irpara_desafio'),
     path('/testar/desafio/<int:pk>', views.TestarDesafio.as_view(), name='testar_desafio'),
 ]

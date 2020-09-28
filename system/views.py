@@ -199,6 +199,7 @@ class Index(View):
             elif url == 'ataque':
                 desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
                 desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+                print(desafios_noti)
             desafios_aceito_1 = len(
                 Jogos.objects.filter(Q(aceite=True), Q(user_defense=user_request) | Q(user_attack=user_request),
                                      Q(Finalizado=False)))

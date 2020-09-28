@@ -8,10 +8,57 @@
 
                         <div class="row">
                             <div class="col-12 ml-2 text-center">
-                                <h2 class="t-orange menu-title">Treine BRUTEFORCE</h2>
+                                <h2 class="t-orange menu-title">Treine BruteForce</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
+                                <p>Defenda nosso servidor de ataques de Brute Force e ganhe pontos para subir de ranking!</p>
+                                <p>Desafie usuários a atacar o servidor que você irá defender!</p>
+                                <p>Fique atento a resposta do usuário, assim que ele aceitar o jogo irá começar!</p>
+                                <div data-toggle="modal" data-target="#desafiar_modal_sql" >
+                                            <a class="btn btn-primary" id="btnRenovacao">
+                                                Desafiar Oponente
+                                            </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 </section>
+{% if users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafiar_modal_sql">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Desafiar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <table style="width:100%">
+                                      {% for usuario in usuarios %}
+                                      <tr>
+                                        <td>{{usuario.nome}}</td>
+                                        <td><a href="{% url 'desafiar' usuario.id 3 %}"><button type="button" class="btn btn-success">Desafiar</button></a><br></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
 {% endblock 'conteudo' %}

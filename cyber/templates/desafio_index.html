@@ -17,6 +17,15 @@
                                         <p>Você que proteger nossa aplicação contra ataques de SQL Injection (INSERT, DELETE, UPDATE, SELECT) durante o desafio!</p>
                                         <p>Quanto mais tempo defender, mais pontos ganhará!</p>
                                         <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
+                                <p>Essa é a linha de código original, altere ela para não sofrer o ataque!!</p>
+                                <p> contatos = Contato.objects.raw(f'SELECT * FROM contatos_contato WHERE nome LIKE "{termo[0]}"')</p>
+                                <form method="post" action="{%url 'inser_line' desafio_id %}">
+                                <label>Nova linha:<br />
+                                            <input type="text" name="new_code" placeholder="Linha">
+                                        </label><br />
+                                    {% csrf_token %}
+                                <button type="submit" class="btn btn-block m-0 btn-success" >Enviar</button>
+                                    </form>
                                     {% endif %}
                                  {% endif %}
                                 {% if url == 'ataque' %}
@@ -25,7 +34,16 @@
                                         <p>Você terá que atacar nossa aplicação com ataques de SQL Injection (INSERT, DELETE, UPDATE, SELECT) durante o desafio!</p>
                                         <p>Quanto mais rápido atacar, mais pontos ganhará!</p>
                                         <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
-                                    {% endif %}
+
+
+                                    {% elif categoria.nome == 'Brute Force' %}
+                                 <p>O desafio irá durar 1 hora!</p>
+                                        <p>Você terá que atacar nossa aplicação com ataques de Brute Force durante o desafio!</p>
+                                        <p>Quanto mais rápido atacar, mais pontos ganhará!</p>
+                                        <p>Não saia dessa página, ou seus pontos não serão contabilizados!</p>
+                                					<p>Acesse a url: http://agenda.com:800/accounts/login/(id do desafio) e efetue o login para ganhar o desafio</p>
+
+                                {% endif %}
                                  {% endif %}
                                 Hora de Inicio:<br> {{desafio.inicio_jogo.hour}}:{{desafio.inicio_jogo.minute}}<br>
                                 Hora de Fim: <div id="date_fim">{{desafio.fim_jogo.hour}}:{{desafio.fim_jogo.minute}}</div><br>
@@ -38,7 +56,8 @@ var tempo = new Number();
             console.log(document.getElementById('date_fim').innerHTML);
             var hms = document.getElementById('date_fim').innerHTML;
             var a  = hms.split(':');
-            var minutes = (+a[0]) * 60 + (+a[1]);
+            var an = a[0];
+            var minutes = (+an) * 60 + (+a[1]);
             var d = new Date();
             var n = d.getHours();
             var m = d.getMinutes();
