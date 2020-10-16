@@ -13,4 +13,5 @@ urlpatterns = [
     path('/ddos', views.IndexDdos.as_view(), name='ddos_index'),
     path('/sql', views.IndexSql.as_view(), name='sql_index'),
     path('/brute', views.IndexBrute.as_view(), name='brute_index'),
+    path('/xss', views.IndexXss.as_view(), name='xss_index'),
 ]

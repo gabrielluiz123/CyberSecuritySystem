@@ -8,7 +8,7 @@
 
                         <div class="row">
                             <div class="col-12 ml-2 text-center">
-                                <h2 class="t-orange menu-title">Entenda DDoS</h2>
+                                <h2 class="t-orange menu-title">Entenda SQL Injection</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
 
 <head>
@@ -72,33 +72,26 @@ body {font-family: "Lato", sans-serif;}
 
 <div style="overflow:auto" id="London" class="tabcontent">
   <br><h3>SQL Injection</h3><br>
-  <p>O SQL Injection é o nome dado a uma falha na codificação de uma aplicação qualquer (seja web ou local) que possibilita, por meio de um input qualquer, a manipulação de uma consulta SQL. Essa manipulação é chamada Injeção, então, o termo Injeção SQL. Resumindo: o SQL Injection é uma técnica de ataque baseada na manipulação do código SQL, que é a linguagem utilizada para troca de informações entre aplicativos e bancos de dados relacionais. </p>
-  <p>De acordo com o Lacking Faces, "pense em SQL Injection como uma simples falha lógica, é simplesmente uma falha que, por deixar aberta a interpretações, ocorrem manipulações indesejáveis". .</p>
+  <p>Brute Force ou Ataque de Fordça Bruta é um ataque que faz exaustivos testes até encontrar a senha ou chave que está procurando.</p>
+  <p>Utilizado principalmente para a quebra de senhas e criptografias, porém quanto maior a complexidade do objeto a ser quebrado, maior o gasto de processamento e de tempo do ataque.</p>
+  <p>Pode ser feita de maneira manual, digitando a senha e o login diversas vezes manualmente, ou de maneira automática, por meio de um algoritmo que efetue várias tentativas em um curto periodo de tempo.</p>
+  <p>Na utilização de algoritmos, são utilizados 'words lists' para auxiliar o programa a quebrar a senha mais rapidamente.</p>
 </div>
 
 <div style="overflow:auto" id="Paris" class="tabcontent">
   <br><h3>Principais Consequências</h3><br>
-  <p>Com os ataques de SQL Injection, os criminosos podem ter acesso a qualquer tipo de dado sigiloso mantido no servidor: dados pessoais, comerciais, informações de clientes ou mesmo senhas e detalhes de cartão de crédito. Isso tudo porque uma vulnerabilidade que permita o ataque pode afetar qualquer site que use um banco de dados SQL. </p>
-  <p>As vulnerabilidades também podem ser usadas pelos invasores para desconsiderar as medidas de segurança do aplicativo. Em determinadas situações, os criminosos também podem agir de forma a comprometer o servidor ou uma infraestrutura de back-end.</p>
-  <p>Acessar os servidores com o SQL pode ser o primeiro passo para que, posteriormente, seja realizado o ataque à rede interna. Dependendo do nível de permissões disponíveis, é possível até instalar um ransomware em sistemas comprometidos.</p>
-  <p>Além disso, os invasores também podem:
-
-– autenticar e autorizar um aplicativo ou página da web;
-
-– recuperar o conteúdo do banco de dados;
-
-– utilizar o ataque para adicionar, excluir e modificar, permanentemente, registros nos bancos de dados. </p>
+  <p>Quando um ataque de força bruta é executado com sucesso em um sistema, o atacante ganha todas as permissões do usuário atacado dentro do sistema.</p>
+  <p>Tendo as permissões, terá acesso a todas as informações que o usuário tem dentro do sistema, dependendo da confidencialidade das informações e do nível de permissão do usuário, as consequências serão catastróficas.</p>
+  <p>Desde o vazamento de informações confidenciais até a estabilidade do sistema pode ser comprometida se a senha quebrada for de um administrador do sistema por exemplo</p>
+  <p>Até mesmo o vazamento de informações e dados pessoais, no caso de invasões de redes sociais ou de computadores pessoais.</p>
 </div>
 
 <div style="overflow:auto" id="Tokyo" class="tabcontent">
-    {% if url == 'defesa' %}
-      <br><h3>Como Previnir</h3><br>
-      <p>Existem várias maneiras de prevenção contra BruteForce que o usuário pode adotar para se proteger, como:</p>
-        <li>Não utilizar a mesma senha em diversos sistemas</li>
-        <li>Não colocar palavras relacionadas a você nas senhas</li>
-        <li>Utilizar senhas complexas compostas por letras, números e caracteres especiais</li>
-        <li>Usando Django como exemplo: Contato.objects.annotate(nome_completo=campos).filter(Q(nome_completo__icontains=termo) | Q(telefone__icontains=termo), mostrar=True) </li>
-    {% endif%}
+  <br><h3>Como Previnir</h3><br>
+  <p>Existem várias maneiras de prevenção contra BruteForce que o usuário pode adotar para se proteger, como:</p>
+    <li>Não utilizar a mesma senha em diversos sistemas</li>
+    <li>Não colocar palavras relacionadas a você nas senhas</li>
+    <li>Utilizar senhas complexas compostas por letras, números e caracteres especiais</li>
 </div>
 
 <div style="overflow:auto" id="Links" class="tabcontent">

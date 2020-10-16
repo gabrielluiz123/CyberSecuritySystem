@@ -9,7 +9,7 @@ from datetime import *
 import pymysql.cursors
 
 conexao = pymysql.connect(
-    host='3.136.106.75',
+    host='18.219.154.84',
     user='admin',
     password='Maria@1601',
     db='sitedjango',
@@ -36,7 +36,6 @@ class Index(View):
         elif url == 'ataque':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
-            print('AQUIIIIIIIIIII '+desafios_noti)
             desafios_aceito_1 = len(Jogos.objects.filter(aceite=True, user_attack=user_request, desafiado=request.user, Finalizado=False))
             desafios_aceito_noti = Jogos.objects.filter(aceite=True, user_attack=user_request, desafiado=request.user, Finalizado=False)
         if request.user.is_authenticated:
@@ -47,8 +46,8 @@ class Index(View):
                                                     Q(user_defense=user_request) | Q(user_attack=user_request),
                                                     Q(Finalizado=False))
         desafios_aceito_1 = len(desafios_aceito_noti)
-        print("ATAQUE")
         print(desafios_aceito_1)
+
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
@@ -66,7 +65,7 @@ class Index(View):
 
 class IndexBrute(View):
     model = 'jogo'
-    template_name = 'brute_jogo_index.html'
+    template_name = 'brute_jogo_index_cop.html'
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
@@ -127,6 +126,7 @@ class IndexSQL(View):
             nome = None
         usuarios = Usuario.objects.all().exclude(pk=request.user.id)
         self.contexto = {
+            'code':'<p> aa </p>',
             'categoria_id':2,
             'users': request.user.is_authenticated,
             'nome': nome,
@@ -144,7 +144,7 @@ class IndexSQL(View):
 
 class IndexDdos(View):
     model = 'jogo'
-    template_name = 'ddos_jogo_index.html'
+    template_name = 'xss_jogo_index.html'
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
@@ -164,9 +164,13 @@ class IndexDdos(View):
             nome = request.user.first_name.strip().split(' ')[0]
         else:
             nome = None
+        usuarios = Usuario.objects.all().exclude(pk=request.user.id)
         self.contexto = {
+            'code':'<p> aa </p>',
+            'categoria_id':1,
             'users': request.user.is_authenticated,
             'nome': nome,
+            'usuarios': usuarios,
             'url': url,
             'number': desafios_1,
             'number_aceito': desafios_aceito_1,
@@ -176,7 +180,6 @@ class IndexDdos(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.contexto)
-
 
 class Desafiar(View):
     model = 'jogo'
@@ -217,6 +220,7 @@ class Desafiar(View):
                                                     Q(user_defense=user_request) | Q(user_attack=user_request),
                                                     Q(Finalizado=False))
         desafios_aceito_1 = len(desafios_aceito_noti)
+
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
@@ -253,11 +257,11 @@ class AceitarDesafio(View):
             desafio.aceite = True
             desafio.iniciado = True
             desafio.inicio_jogo = datetime.now()
-            desafio.fim_jogo = datetime.now() + timedelta(minutes=5)
+            desafio.fim_jogo = datetime.now() + timedelta(minutes=1)
             desafio.save()
             cursor = conexao.cursor()
-            print('INSERT INTO sitedjango.contatos_contato (desafio_id, nome, sobrenome, telefone, email, data_criacao, descricao, mostrar, foto, login, sql_desafio, new_code) values ('+str(pk_desafio)+', "DEsafio", "Ataque", "1222", "g@g.com", "2020-01-01 00:00:00", "aa", 1, "1", 0, 0, "contatos = Contato.objects.raw(f\'SELECT * FROM contatos_contato WHERE nome LIKE \'{termo[0]}\'\')" )')
-            cursor.execute('INSERT INTO sitedjango.contatos_contato (desafio_id, nome, sobrenome, telefone, email, data_criacao, descricao, mostrar, foto, login, sql_desafio, new_code) values ('+str(pk_desafio)+', "DEsafio", "Ataque", "1222", "g@g.com", "2020-01-01 00:00:00", "aa", 1, "1", 0, 0, "contatos = Contato.objects.raw(f\'SELECT * FROM contatos_contato WHERE nome LIKE \\"{termo[0]}\\"\')" )')
+            print('INSERT INTO sitedjango.contatos_contato (desafio_id, nome, sobrenome, telefone, email, data_criacao, descricao, mostrar, foto, login, sql_desafio, new_code, new_header2) values ('+str(pk_desafio)+', "DEsafio", "Ataque", "1222", "g@g.com", "2020-01-01 00:00:00", "aa", 1, "1", 0, 0, "contatos = Contato.objects.raw(f\'SELECT * FROM contatos_contato WHERE nome LIKE \'{termo[0]}\'\')" )')
+            cursor.execute('INSERT INTO sitedjango.contatos_contato (desafio_id, nome, sobrenome, telefone, email, data_criacao, descricao, mostrar, foto, login, sql_desafio, new_code, new_header, new_header2) values ('+str(pk_desafio)+', "DEsafio", "Ataque", "1222", "g@g.com", "2020-01-01 00:00:00", "aa", 1, "1", 0, 0, "dsadsadsadadgfdg", "sdaoijfda", "dsiojfads")')
             conexao.commit()
             cursor.close()
         categoria = desafio.categoria
@@ -336,6 +340,7 @@ class TestarDesafio(View):
         super().setup(request, *args, **kwargs)
         url = Url.objects.get(url=request.META['HTTP_HOST']).nome
         user_request = Usuario.objects.get(user=request.user)
+        self.resultado_login = self.resultado_sql = 0
         if url == 'defesa':
             desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
             desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
@@ -364,19 +369,44 @@ class TestarDesafio(View):
         cursor.execute(f'SELECT login FROM contatos_contato WHERE desafio_id = {pk_desafio}')
         self.resultado1 = cursor.fetchall()
         cursor.close()
-        print('Resultado')
 
+        self.resultado_header_r = ''
         for resultado in self.resultado1:
             for key in resultado:
                 self.resultado_login = resultado[key] = int(resultado[key])
+        cursor = conexao.cursor()
+        cursor.execute(f'SELECT new_header2 FROM contatos_contato WHERE desafio_id = {pk_desafio}')
+        self.resultado_header = cursor.fetchall()
+        cursor.close()
+        for resultado in self.resultado_header:
+            for key in resultado:
+                self.resultado_header_r = resultado[key] = str(resultado[key])
+        self.res_xss_bool = True
+        if '<script' in self.resultado_header_r and '</script>' in self.resultado_header_r:
+            self.res_xss_bool = False
+        print('Resultado')
         desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
                                                     Q(user_defense=user_request) | Q(user_attack=user_request),
                                                     Q(Finalizado=False))
         desafios_aceito_1 = len(desafios_aceito_noti)
         self.category = categoria.id
-        self.resultado_login = self.resultado_sql = 0
+
+        print('SQL')
+        print(self.resultado_sql)
+
         if not desafio.Finalizado:
-            if categoria.id == 2:
+            if categoria.id == 1:
+                if self.res_xss_bool:
+                    self.jogador_defesa.pontos_defesa = self.jogador_defesa.pontos_defesa + 10
+                    self.jogador_defesa.pontos = self.jogador_defesa.pontos + 10
+                    self.jogador_defesa.save()
+                    messages.success(request, 'Defesa Ganhou!!')
+                else:
+                    self.jogador_ataque.pontos_ataque = self.jogador_ataque.pontos_ataque + 10
+                    self.jogador_ataque.pontos = self.jogador_ataque.pontos + 10
+                    self.jogador_ataque.save()
+                    messages.success(request, 'Ataque Ganhou!!')
+            elif categoria.id == 2:
                 if self.resultado_sql == 0:
                     self.jogador_defesa.pontos_defesa = self.jogador_defesa.pontos_defesa + 10
                     self.jogador_defesa.pontos = self.jogador_defesa.pontos + 10
@@ -401,6 +431,7 @@ class TestarDesafio(View):
         desafio.Finalizado = True
         desafio.save()
 
+
         self.contexto = {
             'desafio_id': desafio.id,
             'users': request.user.is_authenticated,
@@ -415,7 +446,12 @@ class TestarDesafio(View):
         }
 
     def get(self, request, *args, **kwargs):
-        if self.category == 2:
+        if self.category == 1:
+            if self.res_xss_bool:
+                messages.success(request, 'Defesa Ganhou!!')
+            else:
+                messages.success(request, 'Ataque Ganhou!!')
+        elif self.category == 2:
             if self.resultado_sql == 0:
                 messages.success(request, 'Defesa Ganhou!!')
             else:
@@ -457,6 +493,7 @@ class InserirCode(View):
         code.replace('"', "\\\\")
         print(code)
         self.pk_desafio = self.kwargs.get('pk')
+        cursor = conexao.cursor()
         cursor.execute(f'UPDATE contatos_contato set new_code = "{code}" where desafio_id = {self.pk_desafio}')
         conexao.commit()
         cursor.close()
@@ -465,4 +502,90 @@ class InserirCode(View):
         return redirect('irpara_desafio', self.pk_desafio)
     def post(self, request, *args, **kwargs):
         messages.success(request, 'Codigo inserido com sucesso')
+        return redirect('irpara_desafio', self.pk_desafio)
+
+
+class ChangePass(View):
+    model = 'system'
+    template_name = 'brute_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
+        desafios_noti = None
+        desafios_1 = None
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+            user_request = Usuario.objects.get(user=request.user)
+            if url == 'defesa':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+            elif url == 'ataque':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        else:
+            nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
+        code = str(request.POST.get('new_pass'))
+        code.replace("'", "\\'")
+        code.replace('"', "\\\\")
+        print(code)
+        self.pk_desafio = self.kwargs.get('pk')
+        cursor = conexao.cursor()
+        cursor.execute(f'UPDATE contatos_contato set new_senha = "{code}" where desafio_id = {self.pk_desafio}')
+        conexao.commit()
+        cursor.close()
+
+        messages.success(request, 'Senha modificada com sucesso')
+        return redirect('irpara_desafio', self.pk_desafio)
+    def post(self, request, *args, **kwargs):
+        messages.success(request, 'Senha modificada com sucesso')
+        return redirect('irpara_desafio', self.pk_desafio)
+
+
+
+class ChangeHeader(View):
+    model = 'system'
+    template_name = 'brute_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
+        desafios_noti = None
+        desafios_1 = None
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+            user_request = Usuario.objects.get(user=request.user)
+            if url == 'defesa':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+            elif url == 'ataque':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        else:
+            nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
+        code = str(request.POST.get('new_header'))
+        code.replace("'", "\\'")
+        code.replace('"', "\\\\")
+        code2 = str(request.POST.get('new_header2'))
+        code2.replace("'", "\\'")
+        code2.replace('"', "\\\\")
+        print(code)
+        self.pk_desafio = self.kwargs.get('pk')
+        cursor = conexao.cursor()
+        cursor.execute(f'UPDATE contatos_contato set new_header = "{code}", new_header2 = "{code2}" where desafio_id = {self.pk_desafio}')
+        conexao.commit()
+        cursor.close()
+
+        messages.success(request, 'Senha modificada com sucesso')
+        return redirect('irpara_desafio', self.pk_desafio)
+    def post(self, request, *args, **kwargs):
+        messages.success(request, 'Senha modificada com sucesso')
         return redirect('irpara_desafio', self.pk_desafio)

@@ -1,23 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
-{% block 'titulo' %}SQL Injection {% endblock %}
+{% block 'titulo' %}XSS {% endblock %}
 
 {% block 'conteudo' %}
 <section id="first-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
                     <div class="container p-5" id="quem_somos">
 
-
                         <div class="row">
                             <div class="col-12 ml-2 text-center">
-                                <h2 class="t-orange menu-title">Treine SQL INJECTION</h2>
+                                <h2 class="t-orange menu-title">Treine XSS</h2>
                                 <div class="divisor bg-grey mb-5 mt-3"></div>
                                 {% if url == 'defesa' %}
-                                    <p>Defenda nosso servidor de ataques de SQL Injection e ganhe pontos para subir de ranking!</p>
+                                    <p>Defenda nosso servidor de ataques de SXSS e ganhe pontos para subir de ranking!</p>
                                     <p>Desafie usuários a atacar o servidor que você irá defender!</p>
                                     <p>Fique atento a resposta do usuário, assim que ele aceitar o jogo irá começar!</p>
                                 {% else %}
-                                    <p>Ataque nosso servidor com SQL Injection e ganhe pontos para subir de ranking!</p>
-                                    <p>Desafie usuários a defender o servidor dos seus ataques!</p>
+                                    <p>Ataque nosso servidor com XSS e ganhe pontos para subir de ranking!</p>
+                                    <p>Desafie usuários a se defender dos seus ataques!</p>
                                     <p>Fique atento a resposta do usuário, assim que ele aceitar o jogo irá começar!</p>
                                 {% endif %}
                                 <div data-toggle="modal" data-target="#desafiar_modal_sql" >
@@ -46,7 +45,7 @@
                                       {% for usuario in usuarios %}
                                       <tr>
                                         <td>{{usuario.nome}}</td>
-                                        <td><a href="{% url 'desafiar' usuario.id 2 %}"><button type="button" class="btn btn-success">Desafiar</button></a><br></td>
+                                        <td><a href="{% url 'desafiar' usuario.id 1 %}"><button type="button" class="btn btn-success">Desafiar</button></a><br></td>
                                       </tr>
                                       {% endfor %}
                                     </table>

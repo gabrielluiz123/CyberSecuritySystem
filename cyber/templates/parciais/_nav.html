@@ -26,7 +26,9 @@
 
                               <div class="dropdown-menu"  aria-labelledby="dropdownMenuLink">
                                   <a class="dropdown-item" href="{% url 'index' %}">Página Inicial</a>
-
+                                  <a href="{% url 'ranking' %}" class="dropdown-item" id="btnLogout">
+                                        Ranking
+                                    </a>
                                 {%if users %}
                                   <div data-toggle="modal" data-target="#desafios_noti" >
                                   <a class="dropdown-item" id="desafios">
@@ -42,9 +44,7 @@
                                         Sair
                                     </a>
                                 {%endif%}
-                                  <a href="{% url 'ranking' %}" class="dropdown-item" id="btnLogout">
-                                        Ranking
-                                    </a>
+
                               </div>
                                     {%endif%}
                                     <li class="menu-item p-3 scroll" data-scroll-to="home">Início</li>

@@ -45,8 +45,7 @@ class IndexJogar(View):
                                                         Q(user_defense=user_request) | Q(user_attack=user_request),
                                                         Q(Finalizado=False))
             desafios_aceito_1 = len(desafios_aceito_noti)
-            print("ATAQUE")
-            print(desafios_aceito_1)
+
         self.contexto = {
             'users': request.user.is_authenticated,
             'nome': nome,
@@ -60,6 +59,45 @@ class IndexJogar(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.contexto)
+
+
+class IndexXss(View):
+    model = 'system'
+    template_name = 'xss_index.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        url = Url.objects.get(url=request.META['HTTP_HOST']).nome
+        desafios_noti = None
+        desafios_1 = None
+        if request.user.is_authenticated:
+            nome = request.user.first_name.strip().split(' ')[0]
+            user_request = Usuario.objects.get(user=request.user)
+            if url == 'defesa':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_defense=user_request, desafiado=request.user)
+            elif url == 'ataque':
+                desafios_1 = len(Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user))
+                desafios_noti = Jogos.objects.filter(aceite=False, user_attack=user_request, desafiado=request.user)
+        else:
+            nome = None
+        desafios_aceito_noti = Jogos.objects.filter(Q(aceite=True),
+                                                    Q(user_defense=user_request) | Q(user_attack=user_request),
+                                                    Q(Finalizado=False))
+        desafios_aceito_1 = len(desafios_aceito_noti)
+        self.contexto = {
+            'number_aceito': desafios_aceito_1,
+            'desafios_aceitos': desafios_aceito_noti,
+            'users': request.user.is_authenticated,
+            'nome': nome,
+            'url': url,
+            'number': desafios_1,
+            'desafios': desafios_noti,
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.contexto)
+
 
 
 class IndexBrute(View):

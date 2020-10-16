@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'titulo' %}SQL Injection {% endblock %}
+
+{% block 'conteudo' %}
+<section id="first-board" class="bg-white vh-min-100 list-me z-2 p-rel pt-5 reveal l-fade-scroll lazy">
+                    <div class="container p-5" id="quem_somos">
+
+                        <div class="row">
+                            <div class="col-12 ml-2 text-center">
+                                <h2 class="t-orange menu-title">Entenda XSS</h2>
+                                <div class="divisor bg-grey mb-5 mt-3"></div>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #fffff;
+  width: 30%;
+  height: 300px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #00aeef;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+}
+</style>
+</head>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">O Ataque</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Consequências</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Prevenção</button>
+  <button class="tablinks" onclick="openCity(event, 'Links')">Links Úteis</button>
+</div>
+
+<div style="overflow:auto" id="London" class="tabcontent">
+  <br><h3>XSS</h3><br>
+  <p>É uma vulnerabilidade presente em aplicações web que permite que o cibercriminoso insira códigos Java Script para obter certos tipos de vantagem sobre as vítimas.
+
+O Cross-Site Scripting (XSS) é normalmente aplicado em páginas que sejam comuns a todos os usuários, como por exemplo a página inicial de um site ou até mesmo páginas onde usuários podem deixar seus depoimentos. Para que o ataque possa ocorrer é necessário um formulário que permita a interação do atacante, como por exemplo em campos de busca ou inserção de comentários. </p>
+  <p>Tipos de Ataque
+
+Existem três tipos de ataques Cross-Site Script, e apesar de terem semelhanças entre si seu nível de abrangência e periculosidade são bem diferentes. São eles:
+
+Reflected XSS
+
+Nessa forma de ataque XSS uma área do site que não armazena informações é utilizada para injetar o código malicioso, como por exemplo o campo de busca. A URL com o código malicioso normalmente é disseminada aos usuários através de SPAM, assim que as vítimas acessam a URL, o script malicioso é executado e entrega ao cibercriminoso as informações que ele desejava.
+
+Stored XSS
+
+Tão simples de ser executado quanto o Reflected XSS, essa forma de ataque exige que os cibercriminosos possuam uma forma de escrever dados diretamente na página, como por exemplo campos de comentários, testemunhos e livro de visitas.
+
+É mais perigoso que seu predecessor por manter os dados armazenados permanentemente na página, fazendo com que todos os usuários que visitem esta área específica executem o script malicioso sempre que a acessem.
+
+DOM Based XSS
+
+A vulnerabilidade DOM (Document Object Model) Based XSS executa todos os códigos Java Script maliciosos localmente no browser da vítima, sem ter contato direto com o servidor. Esse tipo de ataque é menos comum pois depende que a página alvo tenha componentes específicos que permitam que a ativação dos códigos aconteça em tempo de execução, ao invés de ficar atrelado a página como os ataques anteriores. </p>
+</div>
+
+<div style="overflow:auto" id="Paris" class="tabcontent">
+  <br><h3>Principais Consequências</h3><br>
+  <p>Os ataques de XSS são frequentemente utilizados para causar danos aos usuários legítimos de um aplicativo vulnerável. Para a corporação, o impacto da vulnerabilidade de XSS é principalmente sua imagem e a possibilidade de utilização da falha para a distribuição de phishing e facilitação de fraudes.
+
+Dentre as principais consequências para o usuário afetado, incluem:
+
+Seqüestro de sessão de usuários;
+
+Alteração do código HTML do aplicativo (visivel somente do lado do cliente);
+
+Redirecionar o usuário para sites maliciosos;
+
+Alteração do objeto DOM para captura de dados ou envio de malware. </p>
+</div>
+
+<div style="overflow:auto" id="Tokyo" class="tabcontent">
+    {% if url == 'defesa' %}
+      <br><h3>Como Previnir</h3><br>
+    <p>Reflected/DOM Based XSS
+
+Apesar da estrutura de funcionamento do ataque ser diferente, a disseminação é semelhante, um link do site que esta sento atacado é preparado pelo cibercriminoso para que execute funções maliciosas e é enviado as vítimas. Fique sempre atento ao clicar em links recebidos, mesmo que o remetente seja algum conhecido próximo, antes de clicar verifique se o link não possui conteúdo malicioso, como por exemplo ter os símbolos < e > ao longo do endereço.
+
+Stored XSS
+
+
+Pelo fato deste tipo de ataque ficar armazenado no site não há uma forma simples de reconhecê-lo, por isso recomendamos que o usuário acesse sempre sites confiáveis e que conheça a reputação. Sites amplamente conhecidos tendem a ter uma equipe responsável por cuidar da segurança do site e de seus usuários.
+
+Utilize navegadores na última versão estável disponibilizada pelo fabricante.
+
+Tenha sempre instalada a última versão do software de proteção de acesso à Internet.
+
+Mantenha sempre ativas as configurações ou softwares Anti-Phishing. </p>
+      <p>Existem várias maneiras de prevenção contra XSS que o usuário pode adotar para se proteger, como:</p>
+        <li>Escape nas entradas dos campos</li>
+        <li>Usando Django como exemplo: escape(input)</li>
+    {% endif%}
+</div>
+
+<div style="overflow:auto" id="Links" class="tabcontent">
+  <br><h3>Links Úteis</h3><br>
+  <p>Para efetuar testes de senhas: <a style="color: blue" href="https://testedesenha.com.br/">https://testedesenha.com.br/</a></p>
+  <p>Artigo sobre senhas: <a style="color: blue" href="https://blogac.me/por-que-a-complexidade-das-senhas-e-tao-importante-para-sua-organizacao/">https://blogac.me/</a></p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+{% endblock 'conteudo' %}

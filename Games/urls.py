@@ -12,4 +12,7 @@ urlpatterns = [
     path('/Inserir_Code/<int:pk>', views.InserirCode.as_view(), name='inser_line'),
     path('/Desafio/<int:pk>', views.IrParaDesafio.as_view(), name='irpara_desafio'),
     path('/testar/desafio/<int:pk>', views.TestarDesafio.as_view(), name='testar_desafio'),
+    path('/Inserir_Senha/<int:pk>', views.ChangePass.as_view(), name='mudar_senha'),
+    path('/Inserir_Header/<int:pk>', views.ChangeHeader.as_view(), name='mudar_header'),
+
 ]

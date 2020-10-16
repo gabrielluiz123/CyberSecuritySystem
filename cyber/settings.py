@@ -91,13 +91,14 @@ DATABASES = {
     'default': {
         'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '18.219.154.84',
         'NAME': 'CyberSecurity',
-        'PASSWORD': '',
-        'PORT': '',
-        'USER': 'root'
+        'PASSWORD': 'Maria@1601',
+        'PORT': '3306',
+        'USER': 'admin'
     }
 }
+
 
 
 # Password validation

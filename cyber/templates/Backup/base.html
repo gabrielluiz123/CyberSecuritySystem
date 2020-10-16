@@ -1,0 +1,338 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<html>
+        <head>
+                        <script defer src="{% static '/assets/pjs/main.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/home.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/albums.min.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/jquery.cycle.lite.1.0.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/carousel.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/script_add.js'%}" type="text/javascript"></script>
+            <script defer src="{% static '/assets/pjs/web-lib.js'%}" type="text/javascript"></script>
+             {% include 'parciais/_head.html' %}
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <style type="text/css">
+            .nav {
+                padding-left: 0;
+            }
+            .nav li {
+                display: inline;
+                list-style-type: none;
+                padding-right: 20px;
+            }
+            .container {
+                width: 940px;
+                margin: 0 auto
+            }
+            .content {
+                float: left;
+                width: 80%;
+            }
+            .sidebar {
+                float: left;
+                width: 20%;
+            }
+        </style>
+            {% include 'parciais/_head.html' %}
+
+                <title>{%block 'titulo'%}{%endblock%} | CyberSecurity</title>
+
+        </head>
+
+        <body>
+
+            <script id="__bs_script__">
+                //<![CDATA[
+                document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.26.7'><\/script>".replace("HOST", location.hostname));
+                //]]>
+            </script>
+
+            <header id="home">
+            {% include 'parciais/_header.html' %}
+                {% include 'parciais/_messages.html' %}
+            </header>
+            <div id="main">
+
+                {% block 'conteudo' %}{% endblock %}
+               {% block 'slider' %}{% endblock %}
+            </div>
+
+
+            {% if not users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="login_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Entrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <form method="POST" class="t-white text-left" action="{% url 'login' %}">
+                                        {% csrf_token %}
+                                        <label style="color: black">Usuário:<br />
+                                            <input type="text" name="email" placeholder="Usuário" required>
+                                        </label>
+
+                                        <label style="color: black">Sua senha:<br />
+                                            <input type="password" name="pwd" placeholder="Sua senha" required>
+                                        </label><br />
+                                        <button id="btnAuth" type="submit" class="btn btn-block m-0 btn-success" >Entrar</button>
+                                        <br><a style="color:blue" href="#" data-toggle="modal" data-target="#cadastrar_resetpwd_modal" id="btnFPwd"><p style="font-size: 12px !important;" class="h6">Esqueceu a senha? Clique aqui!</p></a>
+                                        <a style="color:blue" href="#" data-toggle="modal" data-target="#cadastrar_revneda_modal" id="btnRevenda"><p style="font-size: 12px !important;" class="h6">Ainda não possui Cadastro? Clique aqui!</p></a>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+<div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_revneda_modal">
+    <form method="POST" class="text-left" action="#register_revenda">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cadastrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+                                        {% csrf_token %}
+
+                                <div style="max-width: 50% !important;" class="col-sm">
+                                  <div class="modal-header">
+                                            <h6 class="modal-title">Seu Usuário:</h6>
+                                  </div>
+                                   <br>
+                                        <label>E-mail:<br />
+                                            <input type="email" name="email_cadastro" placeholder="Seu e-mail" required>
+                                        </label><br />
+                                        <label>Nome:<br />
+                                            <input type="text" name="name" placeholder="Seu nome" required>
+                                        </label><br />
+                                        <label>Senha:<br />
+                                            <input type="password" name="pwd" placeholder="Sua senha" required>
+                                        </label><br />
+                                        <label>Confirmar Senha:<br />
+                                            <input type="password" name="pwd2" placeholder="Confirmar Senha" required>
+                                        </label><br />
+                                    <button type="submit" class="btn btn-block m-0 btn-success" >Cadastrar</button>
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+    </form>
+            </div>
+<div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_resetpwd_modal">
+    <form method="POST" class="text-left" action="{% url 'user_reset' %}#first-board-trocarsenha">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Resetar Senha</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">Solicite o código:</h6>
+                                        </div>
+                                        <br><label>Informe seu e-mail:<br />
+                                            <input id="email_reset" type="text" name="email_reset" placeholder="E-mail" required>
+                                        </label><br />
+                                        <br>
+                                   <button type="submit" class="btn btn-block m-0 btn-success" >Solicitar</button>
+
+                                </div>
+                            </div>
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    </form>
+            </div>
+            {%endif%}
+            {% if users %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafios_noti">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Desafios</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <table style="width:100%">
+                                      {% for desafio in desafios %}
+                                      <thead>
+                                      <th>Desafiante</th>
+                                      <th>Defesa</th>
+                                      <th>Ataque</th>
+                                      <th>Categoria</th>
+                                      </thead>
+                                      <tr>
+                                          {% if url == 'defesa' %}
+                                            <td>{{desafio.user_attack}}</td>
+                                            <td>{{desafio.user_attack.pontos_defesa}}</td>
+                                            <td>{{desafio.user_attack.pontos_ataque}}</td>
+                                          {% elif url == 'ataque' %}
+                                            <td>{{desafio.user_defense}}</td>
+                                            <td>{{desafio.user_defense.pontos_defesa}}</td>
+                                            <td>{{desafio.user_defense.pontos_ataque}}</td>
+                                          {% endif %}
+                                            <td>{{desafio.categoria}}</td>
+                                        <td><a href="{% url 'aceitar_desafio' desafio.id %}"><button type="button" class="btn btn-success">Aceitar</button></a><br></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="desafios_noti_aceito">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Desafios</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <table style="width:100%">
+                                      {% for desafio in desafios_aceito %}
+                                      <thead>
+                                      <th>Desafiante</th>
+                                      <th>Defesa</th>
+                                      <th>Ataque</th>
+                                      <th>Categoria</th>
+                                      </thead>
+                                      <tr>
+                                          {% if url == 'defesa' %}
+                                            <td>{{desafio.user_attack}}</td>
+                                            <td>{{desafio.user_attack.pontos_defesa}}</td>
+                                            <td>{{desafio.user_attack.pontos_ataque}}</td>
+                                          {% elif url == 'ataque' %}
+                                            <td>{{desafio.user_defense}}</td>
+                                            <td>{{desafio.user_defense.pontos_defesa}}</td>
+                                            <td>{{desafio.user_defense.pontos_ataque}}</td>
+                                          {% endif %}
+                                            <td>{{desafio.categoria}}</td>
+                                        <td><a href="{% url 'irpara_desafio' desafio.id %}"><button type="button" class="btn btn-success">Ir Para</button></a><br></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                                <div class="col-sm">
+                                  <div class="row justify-content-center">
+                                <div class="col-auto">
+
+
+                                </div>
+                            </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+         {% if revenda_gerente %}
+            <div class="modal fade login-task" tabindex="-1" role="dialog" id="cadastrar_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cadastrar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <form method="POST" class="text-left" action="#register">
+                                        {% csrf_token %}
+                                        <label>E-mail:<br />
+                                            <input type="email" name="email_cadastro" placeholder="Seu e-mail">
+                                        </label><br />
+                                        <label>Nome:<br />
+                                            <input type="text" name="name_cadastro" placeholder="Seu nome">
+                                        </label><br />
+                                        <label>Senha:<br />
+                                            <input type="password" name="pwd_cadastro" placeholder="Sua senha">
+                                        </label><br />
+                                        <label>Confirmar Senha:<br />
+                                            <input type="password" name="pwd_cadastro2" placeholder="Confirmar Senha">
+                                        </label><br />
+                                        <br>
+                                        <button type="submit" class="btn btn-block m-0 btn-success" >Cadastrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         {% endif %}
+         {% block content %}{% endblock content %}
+            <button type="button" class="btn btn-toTop bg-info t-white scroll" data-scroll-to="home">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+         <footer class="bg-brand">
+                {% include 'parciais/footer.html' %}
+            </footer>
+
+        </body>
